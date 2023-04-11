@@ -1,9 +1,6 @@
 import React from 'react';
-import Point from '../../modules/Math3D/entities/Point';
-import Light from '../../modules/Math3D/entities/Light';
-import Sphere from '../../modules/Math3D/figures/Sphere';
+import Math3D, { Point, Light, Sphere } from '../../modules/Math3D';
 import Canvas from '../../modules/Canvas/Canvas';
-import Math3D from '../../modules/Math3D/Math3D';
 import ParamsComponent from './ParamsComponent';
 
 window.requestAnimFrame = (function () {
@@ -43,6 +40,10 @@ class Graph3DComponent extends React.Component {
     this.oneFigurCheckbox = false;
     this.animationCheckbox = true;
 
+    this.showPoints = false;
+    this.showEdges = false;
+    this.showPolygons = true;
+
     this.canvas = new Canvas({
       WIN: this.WIN,
       id: 'canvas3D',
@@ -69,13 +70,15 @@ class Graph3DComponent extends React.Component {
       WIN: this.WIN,
     });
 
-    setInterval(() => {
-      this.scene.forEach((figure) => figure.doAnimation(this.math3D));
-    }, 50);
     let FPS = 0;
     this.FPS = 0;
     let lastTimestamp = Date.now();
 
+    animLoop();
+  }
+
+  componentDidMount() {
+    this.canvas = new Canvas();
     const animLoop = () => {
       FPS++;
       const timestamp = Date.now();
@@ -89,8 +92,16 @@ class Graph3DComponent extends React.Component {
 
       this.renderScene();
     };
+    this.request = window.requestAnimationFrame(animLoop);
+    this.interval = setInterval(() => {
+      this.scene.forEach((figure) => figure.doAnimation(this.math3D));
+    }, 50);
+  }
 
-    animLoop();
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    window.cancelAnimationFrame(this.request);
+    this.canvas = null;
   }
 
   checkbox(name) {

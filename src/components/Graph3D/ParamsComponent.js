@@ -1,17 +1,18 @@
 import React from 'react';
-import Figure from '../../modules/Math3D/entities/Figure';
-import Cube from '../../modules/Math3D/figures/Cube';
-import Cone from '../../modules/Math3D/figures/Cone';
-import Cylinder from '../../modules/Math3D/figures/Cylinder';
-import EllipticalParabaloid from '../../modules/Math3D/figures/EllipticalParabaloid';
-import HyperbolicCylinder from '../../modules/Math3D/figures/HyperbolicCylinder';
-import HyperbolicParaboloid from '../../modules/Math3D/figures/HyperbolicParaboloid';
-import OneWayHyperboloid from '../../modules/Math3D/figures/OneWayHyperboloid';
-import ParabalidCylinder from '../../modules/Math3D/figures/ParabalidCylinder';
-import Tor from '../../modules/Math3D/figures/Tor';
-import TwoWayHyperboloid from '../../modules/Math3D/figures/TwoWayHyperboloid';
-import Sphere from '../../modules/Math3D/figures/Sphere';
-import Ellipsoid from '../../modules/Math3D/figures/Ellipsoid';
+import Figure, {
+  Cone,
+  Cube,
+  Cylinder,
+  Ellipsoid,
+  EllipticalParabaloid,
+  HyperbolicCylinder,
+  HyperbolicParaboloid,
+  OneWayHyperboloid,
+  ParabalidCylinder,
+  Sphere,
+  Tor,
+  TwoWayHyperboloid,
+} from '../../modules/Math3D';
 
 class ParamsComponent extends React.Component {
   constructor(options) {

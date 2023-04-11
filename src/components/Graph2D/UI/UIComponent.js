@@ -6,12 +6,6 @@ class UIComponent extends React.Component {
     this.num = 0;
   }
 
-  _addEventListeners() {
-    document
-      .getElementById('addFunction')
-      .addEventListener('click', () => this.addFunction());
-  }
-
   addFunction() {
     console.log(1);
     const button = document.createElement('button');
@@ -146,6 +140,17 @@ class UIComponent extends React.Component {
         flag
       );
     } catch (e) {}
+  }
+
+  render() {
+    return (
+      <div>
+        <button id="addFunction" onClick={() => this.addFunction()}>
+          Add function
+        </button>
+        <div id="funcsInputs"></div>
+      </div>
+    );
   }
 }
 

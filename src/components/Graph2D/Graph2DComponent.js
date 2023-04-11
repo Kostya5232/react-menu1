@@ -14,6 +14,15 @@ class Graph2DComponent extends React.Component {
       HEIGHT: 20,
     };
 
+    this.funcMath = new FuncMath({ WIN: this.WIN, canvas: this.canvas });
+
+    this.derevativeX = 0;
+    this.funcs = [];
+    this.canMove = false;
+    this.canvas = null;
+  }
+
+  componentDidMount() {
     this.canvas = new Canvas({
       WIN: this.WIN,
       id: 'canvas',
@@ -27,7 +36,6 @@ class Graph2DComponent extends React.Component {
         mouseLeave: () => this.mouseLeave(),
       },
     });
-
     this.ui = new UIComponent({
       id: 'ui',
       parent: this.id,
@@ -37,54 +45,20 @@ class Graph2DComponent extends React.Component {
           this.addFunction(f, num, width, color, sLine, eLine, printDerevative),
       },
     });
-    this.funcMath = new FuncMath({ WIN: this.WIN, canvas: this.canvas });
-
-    this.derevativeX = 0;
-    this.funcs = [];
-    this.canMove = false;
-    this.render();
+    this.renderCanvas();
   }
 
-  addFunction(f, num, width = 9, color = 'red', sLine, eLine, printDerevative) {
-    this.funcs[num] = { f, color, width, sLine, eLine, printDerevative };
-    this.render();
+  render() {
+    return (
+      <div>
+        <div className="canvas">
+          <canvas id="canvas"></canvas>
+        </div>
+      </div>
+    );
   }
 
-  delFunction(num) {
-    this.funcs[num] = null;
-    this.render();
-  }
-
-  mouseMove(event) {
-    if (this.canMove) {
-      this.WIN.LEFT -= this.canvas.sx(event.movementX);
-      this.WIN.BOTTOM -= this.canvas.sy(event.movementY);
-    }
-    this.derevativeX = this.WIN.LEFT + this.canvas.sx(event.offsetX);
-    this.render(event);
-  }
-  mouseLeave() {
-    this.canMove = false;
-  }
-  mouseUp() {
-    this.canMove = false;
-  }
-  mouseDown() {
-    this.canMove = true;
-  }
-  wheel(event) {
-    event.preventDefault();
-    let delta = event.deltaY > 0 ? -0.3 : +0.3;
-    if (this.WIN.BOTTOM + delta < -6) {
-      this.WIN.WIDTH -= delta;
-      this.WIN.HEIGHT -= delta;
-      this.WIN.LEFT += delta / 2;
-      this.WIN.BOTTOM += delta / 2;
-    }
-    this.render();
-  }
-
-  render(event = null) {
+  renderCanvas(event = null) {
     this.canvas.clear();
     this.printXY();
     if (event) {
@@ -112,6 +86,45 @@ class Graph2DComponent extends React.Component {
       }
     });
     return null;
+  }
+
+  addFunction(f, num, width = 9, color = 'red', sLine, eLine, printDerevative) {
+    this.funcs[num] = { f, color, width, sLine, eLine, printDerevative };
+    this.renderCanvas();
+  }
+
+  delFunction(num) {
+    this.funcs[num] = null;
+    this.renderCanvas();
+  }
+
+  mouseMove(event) {
+    if (this.canMove) {
+      this.WIN.LEFT -= this.canvas.sx(event.movementX);
+      this.WIN.BOTTOM -= this.canvas.sy(event.movementY);
+    }
+    this.derevativeX = this.WIN.LEFT + this.canvas.sx(event.offsetX);
+    this.renderCanvas(event);
+  }
+  mouseLeave() {
+    this.canMove = false;
+  }
+  mouseUp() {
+    this.canMove = false;
+  }
+  mouseDown() {
+    this.canMove = true;
+  }
+  wheel(event) {
+    event.preventDefault();
+    let delta = event.deltaY > 0 ? -0.3 : +0.3;
+    if (this.WIN.BOTTOM + delta < -6) {
+      this.WIN.WIDTH -= delta;
+      this.WIN.HEIGHT -= delta;
+      this.WIN.LEFT += delta / 2;
+      this.WIN.BOTTOM += delta / 2;
+    }
+    this.renderCanvas();
   }
 
   printFunction(f, color, width) {

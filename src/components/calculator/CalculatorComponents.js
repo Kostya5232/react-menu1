@@ -65,7 +65,7 @@ class CalculatorComponents extends React.Component {
   // prettier-ignore
   render() {
     return (
-      <div className="menu">
+      <div>
         <div id="CommCalculater">
           <div className="Calculator">
               <h1>Калькулятор</h1>
