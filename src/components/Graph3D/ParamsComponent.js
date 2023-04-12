@@ -1,5 +1,6 @@
 import React from 'react';
-import Figure, {
+import {
+  Figure,
   Cone,
   Cube,
   Cylinder,
@@ -50,13 +51,7 @@ class ParamsComponent extends React.Component {
     str = c;
     figure.dropAnimation();
     str.forEach((elem) => {
-      if (
-        (elem[0] == 'rotateOx' ||
-          elem[0] == 'rotateOy' ||
-          elem[0] == 'rotateOz') &&
-        !isNaN(elem[1]) &&
-        elem.length == 2
-      ) {
+      if ((elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') && !isNaN(elem[1]) && elem.length == 2) {
         figure.setAnimation(elem[0], elem[1] - 0);
       }
     });
@@ -69,13 +64,7 @@ class ParamsComponent extends React.Component {
       str = c;
       figure.dropAnimation();
       str.forEach((elem) => {
-        if (
-          (elem[0] == 'rotateOx' ||
-            elem[0] == 'rotateOy' ||
-            elem[0] == 'rotateOz') &&
-          !isNaN(elem[1]) &&
-          elem.length == 2
-        ) {
+        if ((elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') && !isNaN(elem[1]) && elem.length == 2) {
           figure.setAnimation(elem[0], elem[1] - 0);
         }
       });
@@ -107,9 +96,7 @@ class ParamsComponent extends React.Component {
 
   createElement() {
     if (this.value == 'SolarSystem') {
-      document
-        .querySelectorAll('.paramsFigures')
-        .forEach((elem) => elem.remove());
+      document.querySelectorAll('.paramsFigures').forEach((elem) => elem.remove());
       this.solarSystem();
       this.scene = [new Figure()];
       this.i = 0;
@@ -204,11 +191,7 @@ class ParamsComponent extends React.Component {
       paramB.classList.remove('hide');
       paramBDiscpt.classList.remove('hide');
     }
-    if (
-      this.value == 'Ellipsoid' ||
-      this.value == 'TwoWayHyperboloid' ||
-      this.value == 'OneWayHyperboloid'
-    ) {
+    if (this.value == 'Ellipsoid' || this.value == 'TwoWayHyperboloid' || this.value == 'OneWayHyperboloid') {
       paramB.classList.remove('hide');
       paramC.classList.remove('hide');
       paramBDiscpt.classList.remove('hide');
@@ -254,24 +237,22 @@ class ParamsComponent extends React.Component {
       })
     );
 
-    document
-      .getElementById(`color${this.value}${numberFigur}`)
-      .addEventListener('change', () => {
-        this.applyParam(
-          this.figuresChanger(
-            value,
-            paramA.value - 0,
-            paramB.value - 0,
-            paramC.value - 0,
-            paramCount.value - 0,
-            color.value,
-            x.value - 0,
-            y.value - 0,
-            z.value - 0
-          ).figure,
-          numberFigur
-        );
-      });
+    document.getElementById(`color${this.value}${numberFigur}`).addEventListener('change', () => {
+      this.applyParam(
+        this.figuresChanger(
+          value,
+          paramA.value - 0,
+          paramB.value - 0,
+          paramC.value - 0,
+          paramCount.value - 0,
+          color.value,
+          x.value - 0,
+          y.value - 0,
+          z.value - 0
+        ).figure,
+        numberFigur
+      );
+    });
 
     this.applyParam(
       this.figuresChanger(
@@ -287,12 +268,10 @@ class ParamsComponent extends React.Component {
       ).figure,
       numberFigur
     );
-    document
-      .getElementById(`del${this.value}${this.i}`)
-      .addEventListener('click', () => {
-        this.scene[numberFigur] = new Figure();
-        containerElements.removeChild(div);
-      });
+    document.getElementById(`del${this.value}${this.i}`).addEventListener('click', () => {
+      this.scene[numberFigur] = new Figure();
+      containerElements.removeChild(div);
+    });
 
     this.i++;
   }
@@ -322,22 +301,9 @@ class ParamsComponent extends React.Component {
 
       case 'Ellipsoid':
         return {
-          figure: new Ellipsoid(
-            paramA,
-            paramB,
-            paramC,
-            paramCount,
-            color,
-            x,
-            y,
-            z
-          ),
+          figure: new Ellipsoid(paramA, paramB, paramC, paramCount, color, x, y, z),
           start: [10, 5, 7, 10],
-          descriptionParam: [
-            'Коэффициент a:',
-            'Коэффициент b:',
-            'Коэффициент c:',
-          ],
+          descriptionParam: ['Коэффициент a:', 'Коэффициент b:', 'Коэффициент c:'],
         };
 
       case 'Tor':
@@ -349,15 +315,7 @@ class ParamsComponent extends React.Component {
 
       case 'HyperbolicParaboloid':
         return {
-          figure: new HyperbolicParaboloid(
-            paramA,
-            paramB,
-            paramCount,
-            color,
-            x,
-            y,
-            z
-          ),
+          figure: new HyperbolicParaboloid(paramA, paramB, paramCount, color, x, y, z),
           start: [1, 1, 0, 10],
           descriptionParam: ['Коэффициент p:', 'Коэффициент q:', ''],
         };
@@ -370,93 +328,35 @@ class ParamsComponent extends React.Component {
         };
       case 'OneWayHyperboloid':
         return {
-          figure: new OneWayHyperboloid(
-            paramA,
-            paramB,
-            paramC,
-            paramCount,
-            color,
-            x,
-            y,
-            z
-          ),
+          figure: new OneWayHyperboloid(paramA, paramB, paramC, paramCount, color, x, y, z),
           start: [1, 1, 1, 10],
-          descriptionParam: [
-            'Коэффициент a:',
-            'Коэффициент b:',
-            'Коэффициент c:',
-          ],
+          descriptionParam: ['Коэффициент a:', 'Коэффициент b:', 'Коэффициент c:'],
         };
 
       case 'TwoWayHyperboloid':
         return {
-          figure: new TwoWayHyperboloid(
-            paramA,
-            paramB,
-            paramC,
-            paramCount,
-            color,
-            x,
-            y,
-            z
-          ),
+          figure: new TwoWayHyperboloid(paramA, paramB, paramC, paramCount, color, x, y, z),
           start: [1, 1, 1, 10],
-          descriptionParam: [
-            'Коэффициент a:',
-            'Коэффициент b:',
-            'Коэффициент c:',
-          ],
+          descriptionParam: ['Коэффициент a:', 'Коэффициент b:', 'Коэффициент c:'],
         };
       case 'EllipticalParabaloid':
         return {
-          figure: new EllipticalParabaloid(
-            paramA,
-            paramB,
-            paramCount,
-            color,
-            x,
-            y,
-            z
-          ),
+          figure: new EllipticalParabaloid(paramA, paramB, paramCount, color, x, y, z),
           start: [3, 3, 0, 10],
           descriptionParam: ['Коэффициент a:', 'Коэффициент b:'],
         };
       case 'ParabalidCylinder':
         return {
-          figure: new ParabalidCylinder(
-            paramA,
-            paramB,
-            paramCount,
-            color,
-            x,
-            y,
-            z
-          ),
+          figure: new ParabalidCylinder(paramA, paramB, paramCount, color, x, y, z),
           start: [5, 5, 1, 10],
-          descriptionParam: [
-            'Коэффициент a:',
-            'Коэффициент b:',
-            'Коэффициент k:',
-          ],
+          descriptionParam: ['Коэффициент a:', 'Коэффициент b:', 'Коэффициент k:'],
         };
 
       case 'HyperbolicCylinder':
         return {
-          figure: new HyperbolicCylinder(
-            paramA,
-            paramB,
-            paramCount,
-            color,
-            x,
-            y,
-            z
-          ),
+          figure: new HyperbolicCylinder(paramA, paramB, paramCount, color, x, y, z),
           start: [5, 5, 1, 10],
-          descriptionParam: [
-            'Коэффициент a:',
-            'Коэффициент b:',
-            'Коэффициент k:',
-          ],
+          descriptionParam: ['Коэффициент a:', 'Коэффициент b:', 'Коэффициент k:'],
         };
 
       default:
@@ -488,17 +388,7 @@ class ParamsComponent extends React.Component {
     uranus.setAnimation('rotateOy', 0.0007);
     neptune.setAnimation('rotateOy', 0.0005);
 
-    this.scene.push(
-      sun,
-      mercury,
-      venus,
-      earth,
-      mars,
-      jupiter,
-      saturn,
-      uranus,
-      neptune
-    );
+    this.scene.push(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune);
     this.callbacks.applyParam(this.scene);
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Math3D, { Point, Light, Sphere } from '../../modules/Math3D';
 import Canvas from '../../modules/Canvas/Canvas';
 import ParamsComponent from './ParamsComponent';
+import Graph3DUI from './Graph3DUI';
 
 window.requestAnimFrame = (function () {
   return (
@@ -17,9 +18,8 @@ window.requestAnimFrame = (function () {
 })();
 
 class Graph3DComponent extends React.Component {
-  constructor(param) {
-    super(param);
-
+  constructor(props) {
+    super(props);
     this.WIN = {
       LEFT: -5,
       BOTTOM: -5,
@@ -44,6 +44,57 @@ class Graph3DComponent extends React.Component {
     this.showEdges = false;
     this.showPolygons = true;
 
+    this.math3D = new Math3D({
+      WIN: this.WIN,
+    });
+
+    this.FPS = 0;
+    //this.componentDidMount();
+  }
+
+  showHidePoints(value) {
+    this.showPoints = value;
+  }
+
+  render() {
+    //prettier-ignore
+    return (
+      <div className="canvas3DContain">
+        <div className="canvas3D">
+          <Graph3DUI showHidePoints = {(value) => this.showHidePoints(value)}></Graph3DUI>
+          <canvas id="canvas3D"></canvas>
+        </div>
+
+        <div className="selectFigur" id="selectFigur">
+          <select id="figures">
+            <option className="figur" value="void">Фигуры</option>
+            <option className="figur" value="Cube">Куб</option>
+            <option className="figur" value="Sphere">Сфера</option>
+            <option className="figur" value="Cone">Конус</option>
+            <option className="figur" value="Ellipsiloid">Элипсоид</option>
+            <option className="figur" value="Tor">Тор</option>
+            <option className="figur" value="HyperbolicParaboloid">Седло</option>
+            <option className="figur" value="Cylinder">Цилиндр</option>
+            <option className="figur" value="OneWayHyperboloid">Однополосый гиперболоид</option>
+            <option className="figur" value="TwoWayHyperboloid">Двухполосый гиперболоид</option>
+            <option className="figur" value="EllipticalParabaloid">Эллиптический гиперболоид</option>
+            <option className="figur" value="ParabalidCylinder">Параболический цилиндр</option>
+            <option className="figur" value="HyperbolicCylinder">Гипербалический цилиндр</option>
+            <option className="figur" value="SolarSystem">Солнечная система</option>
+          </select>
+          <input type="checkbox" className="checkboxGraph" value='pointsCheckbox' defaultChecked></input>
+          <span className="pointsTrue">Точки</span>
+          <input type="checkbox" className="checkboxGraph" value = 'edgesCheckbox' defaultChecked></input>
+          <span className="edgesTrue">Грани</span>
+          <input type="checkbox" className="checkboxGraph" value = 'polygonsCheckbox' defaultChecked></input>
+          <span className="polygonsTrue">Полигоны</span>
+          <input type="checkbox" className="checkboxGraph" value = 'lumenCheckbox' defaultChecked></input>
+          <span className="lumenTrue">Свет</span>
+        </div>
+      </div>
+    );
+  }
+  componentDidMount() {
     this.canvas = new Canvas({
       WIN: this.WIN,
       id: 'canvas3D',
@@ -56,6 +107,7 @@ class Graph3DComponent extends React.Component {
         mouseDown: () => this.mouseDown(),
       },
     });
+
     this.ParamsComponent = new ParamsComponent({
       id: 'ParamsComponent',
       parent: this.id,
@@ -66,19 +118,9 @@ class Graph3DComponent extends React.Component {
       },
     });
 
-    this.math3D = new Math3D({
-      WIN: this.WIN,
-    });
-
     let FPS = 0;
-    this.FPS = 0;
     let lastTimestamp = Date.now();
 
-    animLoop();
-  }
-
-  componentDidMount() {
-    this.canvas = new Canvas();
     const animLoop = () => {
       FPS++;
       const timestamp = Date.now();
@@ -159,15 +201,8 @@ class Graph3DComponent extends React.Component {
           figure.points[polygon.points[3]],
         ];
         let { r, g, b } = polygon.color;
-        const { isShadow, dark } = this.math3D.calcShadow(
-          polygon,
-          this.scene,
-          this.LIGHT
-        );
-        let lumen = this.math3D.calcIllumination(
-          polygon.lumen,
-          this.LIGHT.lumen * (isShadow ? dark : 1)
-        );
+        const { isShadow, dark } = this.math3D.calcShadow(polygon, this.scene, this.LIGHT);
+        let lumen = this.math3D.calcIllumination(polygon.lumen, this.LIGHT.lumen * (isShadow ? dark : 1));
         r = Math.round(r * lumen);
         g = Math.round(g * lumen);
         b = Math.round(b * lumen);

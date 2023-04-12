@@ -1,7 +1,4 @@
-import Figure from '../entities/Figure';
-import Point from '../entities/Point';
-import Edge from '../entities/Edge';
-import Polygon from '../entities/Polygon';
+import { Figure, Point, Edge, Polygon } from '../entities';
 
 class Cone extends Figure {
   constructor(r = 2, count = 8, color = 'lightgreen', x = 0, y = 0, z = 0) {

@@ -199,9 +199,7 @@ class Math3D {
         if (polygonZ.lumen > polygon.lumen) {
           continue;
         }
-        const dark =
-          this.calcVectorModule(this.vectorProd(this.calcVector(M0, M1), s)) /
-          module;
+        const dark = this.calcVectorModule(this.vectorProd(this.calcVector(M0, M1), s)) / module;
         if (dark < r) {
           return {
             isShadow: true,

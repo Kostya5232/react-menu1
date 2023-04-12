@@ -28,10 +28,9 @@ class App extends React.Component {
             <Graph2DComponent />
             <UIComponent />
           </div>
+        ) : this.state.showMenuItem === 'graph3D' ? (
+          <Graph3DComponent />
         ) : (
-          // this.state.showMenuItem === 'graph3D' ? (
-          //   <Graph3DComponent />
-          // ) :
           <></>
         )}
       </div>

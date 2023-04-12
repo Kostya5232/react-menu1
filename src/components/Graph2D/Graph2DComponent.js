@@ -155,22 +155,8 @@ class Graph2DComponent extends React.Component {
     //Стрелки
     this.canvas.line(WIDTH + LEFT, 0, WIDTH + LEFT - 0.4, 0.15, 'black', 2);
     this.canvas.line(WIDTH + LEFT, 0, WIDTH + LEFT - 0.4, -0.15, 'black', 2);
-    this.canvas.line(
-      0,
-      HEIGHT + BOTTOM,
-      -0.15,
-      HEIGHT + BOTTOM - 0.4,
-      'black',
-      2
-    );
-    this.canvas.line(
-      0,
-      HEIGHT + BOTTOM,
-      0.15,
-      HEIGHT + BOTTOM - 0.4,
-      'black',
-      2
-    );
+    this.canvas.line(0, HEIGHT + BOTTOM, -0.15, HEIGHT + BOTTOM - 0.4, 'black', 2);
+    this.canvas.line(0, HEIGHT + BOTTOM, 0.15, HEIGHT + BOTTOM - 0.4, 'black', 2);
     //Клетки
     for (let i = 0; i > LEFT; i--) {
       this.canvas.line(i, BOTTOM + LEFT, i, HEIGHT + BOTTOM, '#BEBEBE', 1);
@@ -197,35 +183,17 @@ class Graph2DComponent extends React.Component {
     const len = streakLength / 2;
     const shiftY = -this.WIN.HEIGHT / 200 - 0.4;
     const shiftX = this.WIN.WIDTH / 200;
-    for (
-      let i = Math.round(this.WIN.LEFT);
-      i < this.WIN.LEFT + this.WIN.WIDTH;
-      i++
-    ) {
+    for (let i = Math.round(this.WIN.LEFT); i < this.WIN.LEFT + this.WIN.WIDTH; i++) {
       this.canvas.line(i, len, i, -len, 'black', 2.5);
       this.canvas.text(i, i + shiftX, shiftY);
       // y на оси
-      this.canvas.text(
-        'y',
-        0 + 0.4,
-        this.WIN.BOTTOM + this.WIN.HEIGHT - 0.5,
-        'black'
-      );
+      this.canvas.text('y', 0 + 0.4, this.WIN.BOTTOM + this.WIN.HEIGHT - 0.5, 'black');
     }
-    for (
-      let i = Math.round(this.WIN.BOTTOM);
-      i < this.WIN.BOTTOM + this.WIN.HEIGHT;
-      i++
-    ) {
+    for (let i = Math.round(this.WIN.BOTTOM); i < this.WIN.BOTTOM + this.WIN.HEIGHT; i++) {
       this.canvas.line(len, i, -len, i, 'black', 2.5);
       this.canvas.text(i, shiftX, i + shiftY);
       // x на оси
-      this.canvas.text(
-        'x',
-        this.WIN.LEFT + this.WIN.WIDTH - 0.4,
-        0 + 0.3,
-        'black'
-      );
+      this.canvas.text('x', this.WIN.LEFT + this.WIN.WIDTH - 0.4, 0 + 0.3, 'black');
     }
   };
 

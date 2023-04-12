@@ -1,7 +1,4 @@
-import Figure from '../entities/Figure';
-import Point from '../entities/Point';
-import Edge from '../entities/Edge';
-import Polygon from '../entities/Polygon';
+import { Figure, Point, Edge, Polygon } from '../entities';
 
 class Cylinder extends Figure {
   constructor(r = 5, h = 5, count = 10, color = 'ff0000', x = 0, y = 0, z = 0) {

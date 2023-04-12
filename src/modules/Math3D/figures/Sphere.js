@@ -1,7 +1,4 @@
-import Figure from '../entities/Figure';
-import Point from '../entities/Point';
-import Edge from '../entities/Edge';
-import Polygon from '../entities/Polygon';
+import { Figure, Point, Edge, Polygon } from '../entities';
 
 class Sphere extends Figure {
   constructor(r = 10, count = 20, color = '#ffff44', x = 0, y = 0, z = 0) {
