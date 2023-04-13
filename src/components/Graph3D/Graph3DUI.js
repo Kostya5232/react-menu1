@@ -5,6 +5,8 @@ export default class Graph3DUI extends React.Component {
     super(props);
 
     this.showHidePoints = props.showHidePoints;
+    this.showHideEdges = props.showHideEdges;
+    this.showHidePolygons = props.showHidePolygons;
 
     this.state = { showPanel: false };
   }
@@ -23,10 +25,33 @@ export default class Graph3DUI extends React.Component {
               id="points-checkbox"
               type="checkbox"
               onClick={(event) => this.showHidePoints(event.target.checked)}
+              defaultChecked
             ></input>
+            <label htmlFor="points-checkbox">Точки</label>
           </div>
         )}
-        <label htmlFor="points-checkbox">Точки</label>
+        {this.state.showPanel && (
+          <div>
+            <input
+              id="edges-checkbox"
+              type="checkbox"
+              onClick={(event) => this.showHideEdges(event.target.checked)}
+              defaultChecked
+            ></input>
+            <label htmlFor="edges-checkbox">Грани</label>
+          </div>
+        )}
+        {this.state.showPanel && (
+          <div>
+            <input
+              id="polygons-checkbox"
+              type="checkbox"
+              onClick={(event) => this.showHidePolygons(event.target.checked)}
+              defaultChecked
+            ></input>
+            <label htmlFor="polygons-checkbox">Грани</label>
+          </div>
+        )}
       </div>
     );
   }

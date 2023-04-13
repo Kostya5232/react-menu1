@@ -1,13 +1,13 @@
 import React from 'react';
 
 class UIComponent extends React.Component {
-  constructor(options) {
-    super(options);
+  constructor(props) {
+    super(props);
     this.num = 0;
+    this.callbacks = props.callbacks;
   }
 
   addFunction() {
-    console.log(1);
     const button = document.createElement('button');
     button.setAttribute('id', 'delete');
     button.innerHTML = 'Delete';
@@ -20,7 +20,7 @@ class UIComponent extends React.Component {
       div.removeChild(startLine);
       div.removeChild(endLine);
       div.removeChild(checkbox);
-      //   div.removeChild(derivativeSpan);
+      div.removeChild(derivativeDiv);
     });
 
     const startLine = document.createElement('input');
@@ -60,7 +60,7 @@ class UIComponent extends React.Component {
 
     const checkbox = document.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
-    checkbox.setAttribute('class', 'check2D');
+    checkbox.setAttribute('className', 'check2D');
 
     checkbox.setAttribute('id', 'checkbox' + this.num);
     checkbox.dataset.num = this.num;

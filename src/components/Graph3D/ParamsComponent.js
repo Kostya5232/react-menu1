@@ -14,16 +14,18 @@ import {
   Tor,
   TwoWayHyperboloid,
 } from '../../modules/Math3D';
-
 class ParamsComponent extends React.Component {
-  constructor(options) {
-    super(options);
+  constructor(props) {
+    super(props);
     this.i = 0;
+    this.i++;
     this.scene = [new Figure()];
+    this.callbacks = props.callbacks;
+    //this._addEventListeners();
   }
-
   _addEventListeners() {
-    document.getElementById('figures').addEventListener('change', () => {
+    const figure = document.getElementById('figures');
+    figure.addEventListener('change', () => {
       let value = document.getElementById('figures').value;
       this.value = value;
       this.createElement();
@@ -51,7 +53,11 @@ class ParamsComponent extends React.Component {
     str = c;
     figure.dropAnimation();
     str.forEach((elem) => {
-      if ((elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') && !isNaN(elem[1]) && elem.length == 2) {
+      if (
+        (elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') &&
+        !isNaN(elem[1]) &&
+        elem.length == 2
+      ) {
         figure.setAnimation(elem[0], elem[1] - 0);
       }
     });
@@ -64,7 +70,11 @@ class ParamsComponent extends React.Component {
       str = c;
       figure.dropAnimation();
       str.forEach((elem) => {
-        if ((elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') && !isNaN(elem[1]) && elem.length == 2) {
+        if (
+          (elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') &&
+          !isNaN(elem[1]) &&
+          elem.length == 2
+        ) {
           figure.setAnimation(elem[0], elem[1] - 0);
         }
       });
@@ -91,10 +101,14 @@ class ParamsComponent extends React.Component {
       }
       this.animation(this.scene[i], i);
     }
+    console.log(this);
+    console.log(this.scene);
     this.callbacks.applyParam(this.scene);
   }
 
   createElement() {
+    this.value = document.getElementById('figures').value;
+    console.log('create');
     if (this.value == 'SolarSystem') {
       document.querySelectorAll('.paramsFigures').forEach((elem) => elem.remove());
       this.solarSystem();
@@ -102,6 +116,7 @@ class ParamsComponent extends React.Component {
       this.i = 0;
       return;
     }
+
     const div = document.createElement('div');
     const delFigur = document.createElement('button');
     const descriptionFigur = document.createElement('div');
@@ -199,7 +214,7 @@ class ParamsComponent extends React.Component {
     }
 
     const figur = document.getElementById('selectFigur');
-    const containerElements = document.getElementById('Elements');
+    const containerElements = document.getElementById('listParams');
 
     div.appendChild(countDiscpt);
     div.appendChild(paramCount);
@@ -214,7 +229,6 @@ class ParamsComponent extends React.Component {
     div.appendChild(delFigur);
     figur.appendChild(div);
     containerElements.appendChild(div);
-
     const numberFigur = this.i;
     const value = this.value;
 

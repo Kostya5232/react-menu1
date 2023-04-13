@@ -29,7 +29,6 @@ class Graph3DComponent extends React.Component {
       CAMERA: new Point(0, 0, 40),
     };
     this.canRotate = false;
-
     this.LIGHT = new Light(-30, 30, 10, 30000);
     this.scene = [new Sphere(), new Sphere(3, 20, '#ffff00', -15, 12, -7)];
 
@@ -40,58 +39,64 @@ class Graph3DComponent extends React.Component {
     this.oneFigurCheckbox = false;
     this.animationCheckbox = true;
 
-    this.showPoints = false;
-    this.showEdges = false;
-    this.showPolygons = true;
-
     this.math3D = new Math3D({
       WIN: this.WIN,
     });
-
+    this.ParamsComponent = new ParamsComponent({
+      id: 'ParamsComponent',
+      parent: this.id,
+      callbacks: {
+        applyParam: (scene, i) => this.applyParam(scene),
+        DelParam: (i) => this.DelParam(i),
+        checkbox: (name) => this.checkbox(name),
+      },
+    });
     this.FPS = 0;
-    //this.componentDidMount();
   }
 
   showHidePoints(value) {
-    this.showPoints = value;
+    this.pointsCheckbox = value;
+  }
+  showHideEdges(value) {
+    this.edgesCheckbox = value;
+  }
+  showHidePolygons(value) {
+    this.polygonsCheckbox = value;
   }
 
   render() {
-    //prettier-ignore
     return (
-      <div className="canvas3DContain">
-        <div className="canvas3D">
-          <Graph3DUI showHidePoints = {(value) => this.showHidePoints(value)}></Graph3DUI>
-          <canvas id="canvas3D"></canvas>
-        </div>
+      //prettier-ignore
 
-        <div className="selectFigur" id="selectFigur">
-          <select id="figures">
-            <option className="figur" value="void">Фигуры</option>
-            <option className="figur" value="Cube">Куб</option>
-            <option className="figur" value="Sphere">Сфера</option>
-            <option className="figur" value="Cone">Конус</option>
-            <option className="figur" value="Ellipsiloid">Элипсоид</option>
-            <option className="figur" value="Tor">Тор</option>
-            <option className="figur" value="HyperbolicParaboloid">Седло</option>
-            <option className="figur" value="Cylinder">Цилиндр</option>
-            <option className="figur" value="OneWayHyperboloid">Однополосый гиперболоид</option>
-            <option className="figur" value="TwoWayHyperboloid">Двухполосый гиперболоид</option>
-            <option className="figur" value="EllipticalParabaloid">Эллиптический гиперболоид</option>
-            <option className="figur" value="ParabalidCylinder">Параболический цилиндр</option>
-            <option className="figur" value="HyperbolicCylinder">Гипербалический цилиндр</option>
-            <option className="figur" value="SolarSystem">Солнечная система</option>
-          </select>
-          <input type="checkbox" className="checkboxGraph" value='pointsCheckbox' defaultChecked></input>
-          <span className="pointsTrue">Точки</span>
-          <input type="checkbox" className="checkboxGraph" value = 'edgesCheckbox' defaultChecked></input>
-          <span className="edgesTrue">Грани</span>
-          <input type="checkbox" className="checkboxGraph" value = 'polygonsCheckbox' defaultChecked></input>
-          <span className="polygonsTrue">Полигоны</span>
-          <input type="checkbox" className="checkboxGraph" value = 'lumenCheckbox' defaultChecked></input>
-          <span className="lumenTrue">Свет</span>
-        </div>
-      </div>
+      <div className="canvas3DContain">
+  <div className="canvas3D">
+  <Graph3DUI 
+  showHidePoints={(value) => this.showHidePoints(value)}
+  showHideEdges={(value) => this.showHideEdges(value)}
+  showHidePolygons={(value) => this.showHidePolygons(value)} ></Graph3DUI>
+  <canvas id="canvas3D"></canvas>
+  </div>
+  <div className="selectFigur" id="selectFigur" onChange={()=>{
+  this.ParamsComponent.createElement()}}>
+  <select id="figures">
+  <option className="figur" value="void">Фигуры</option>
+  <option className="figur" value="Cube">Куб</option>
+  <option className="figur" value="Sphere">Сфера</option>
+  <option className="figur" value="Cone">Конус</option>
+  <option className="figur" value="Ellipsoid">Элипсоид</option>
+  <option className="figur" value="Tor">Тор</option>
+  <option className="figur" value="HyperbolicParaboloid">Седло</option>
+  <option className="figur" value="Cylinder">Цилиндр</option>
+  <option className="figur" value="OneWayHyperboloid">Однополосый гиперболоид</option>
+  <option className="figur" value="TwoWayHyperboloid">Двухполосый гиперболоид</option>
+  <option className="figur" value="EllipticalParabaloid">Эллиптический гиперболоид</option>
+  <option className="figur" value="ParabalidCylinder">Параболический цилиндр</option>
+  <option className="figur" value="HyperbolicCylinder">Гипербалический цилиндр </option>
+  <option className="figur" value="SolarSystem">Солнечная система </option>
+  </select>
+  <div id="listParams"></div>
+  </div>
+  </div>
     );
   }
   componentDidMount() {
@@ -108,16 +113,6 @@ class Graph3DComponent extends React.Component {
       },
     });
 
-    this.ParamsComponent = new ParamsComponent({
-      id: 'ParamsComponent',
-      parent: this.id,
-      callbacks: {
-        applyParam: (scene, i) => this.applyParam(scene),
-        DelParam: (i) => this.DelParam(i),
-        checkbox: (name) => this.checkbox(name),
-      },
-    });
-
     let FPS = 0;
     let lastTimestamp = Date.now();
 
@@ -129,12 +124,12 @@ class Graph3DComponent extends React.Component {
         FPS = 0;
         lastTimestamp = timestamp;
       }
-      window.requestAnimFrame(animLoop);
+      window.requestAnimationFrame(animLoop);
       this.scene.forEach((elem) => elem.doAnimation(this.math3D));
 
       this.renderScene();
     };
-    this.request = window.requestAnimationFrame(animLoop);
+    this.request = window.requestAnimFrame(animLoop);
     this.interval = setInterval(() => {
       this.scene.forEach((figure) => figure.doAnimation(this.math3D));
     }, 50);
@@ -143,7 +138,7 @@ class Graph3DComponent extends React.Component {
   componentWillUnmount() {
     clearInterval(this.interval);
     window.cancelAnimationFrame(this.request);
-    this.canvas = null;
+    //this.canvas = null;
   }
 
   checkbox(name) {

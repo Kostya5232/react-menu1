@@ -14,8 +14,6 @@ class Graph2DComponent extends React.Component {
       HEIGHT: 20,
     };
 
-    this.funcMath = new FuncMath({ WIN: this.WIN, canvas: this.canvas });
-
     this.derevativeX = 0;
     this.funcs = [];
     this.canMove = false;
@@ -45,6 +43,9 @@ class Graph2DComponent extends React.Component {
           this.addFunction(f, num, width, color, sLine, eLine, printDerevative),
       },
     });
+
+    this.funcMath = new FuncMath({ WIN: this.WIN, canvas: this.canvas });
+
     this.renderCanvas();
   }
 
@@ -54,6 +55,10 @@ class Graph2DComponent extends React.Component {
         <div className="canvas">
           <canvas id="canvas"></canvas>
         </div>
+        <button id="addFunction" onClick={() => this.ui.addFunction()}>
+          Add function
+        </button>
+        <div id="funcsInputs"></div>
       </div>
     );
   }

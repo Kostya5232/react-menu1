@@ -8,8 +8,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { showMenuItem: 'calc' };
-    this.state = { showMenuItem: 'graph2D' };
     this.state = { showMenuItem: 'graph3D' };
   }
 
@@ -25,8 +23,7 @@ class App extends React.Component {
           <CalculatorComponents />
         ) : this.state.showMenuItem === 'graph2D' ? (
           <div>
-            <Graph2DComponent />
-            <UIComponent />
+          <Graph2DComponent />
           </div>
         ) : this.state.showMenuItem === 'graph3D' ? (
           <Graph3DComponent />
