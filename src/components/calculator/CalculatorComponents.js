@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calculator, PolynomialCalculator } from '../calculator';
+import './styleCalc.css';
 class CalculatorComponents extends React.Component {
   constructor(props) {
     super(props);
@@ -7,36 +8,13 @@ class CalculatorComponents extends React.Component {
     this.calculator = new Calculator();
   }
 
-  // _addEventListeners() {
-  //   document.querySelectorAll('.operand-calc').forEach((button) => {
-  //     button.addEventListener('click', () =>
-  //       this.operandHandlerCalc(button.dataset.operand)
-  //     );
-  //   });
-  //   document
-  //     .querySelectorAll('.operand-poly')
-  //     .forEach((button) =>
-  //       button.addEventListener('click', () =>
-  //         this.operandHandlerPoly(button.dataset.operand)
-  //       )
-  //     );
-
-  //   document
-  //     .querySelectorAll('.operand-result')
-  //     .forEach((button) =>
-  //       button.addEventListener('click', this.operandHandlerResult)
-  //     );
-  // }
-
   operandHandlerCalc(operand) {
     const inputA = document.getElementById('inputA');
     const inputB = document.getElementById('inputB');
     let a = this.calculator.getEntity(inputA.value);
     let b = this.calculator.getEntity(inputB.value);
     const c = this.calculator[operand](a, b);
-    document.getElementById('CalcResult').innerHTML = c
-      ? c.toString()
-      : 'Ошибка!!!';
+    document.getElementById('CalcResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
   }
 
   operandHandlerPoly(operand) {
@@ -46,9 +24,7 @@ class CalculatorComponents extends React.Component {
     const a = calc.getPolynomial(inputP1.value);
     const b = calc.getPolynomial(inputP2.value);
     const c = calc[operand](a, b);
-    document.getElementById('PolyResult').innerHTML = c
-      ? c.toString()
-      : 'Ошибка!!!';
+    document.getElementById('PolyResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
   }
 
   operandHandlerResult() {
@@ -65,7 +41,7 @@ class CalculatorComponents extends React.Component {
   // prettier-ignore
   render() {
     return (
-      <div>
+      <div id='calc'>
         <div id="CommCalculater">
           <div className="Calculator">
               <h1>Калькулятор</h1>

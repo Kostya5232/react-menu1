@@ -3,6 +3,7 @@ import Math3D, { Point, Light, Sphere } from '../../modules/Math3D';
 import Canvas from '../../modules/Canvas/Canvas';
 import ParamsComponent from './ParamsComponent';
 import Graph3DUI from './Graph3DUI';
+import './styleCanvas3D.css';
 
 window.requestAnimFrame = (function () {
   return (

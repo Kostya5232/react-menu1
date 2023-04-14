@@ -1,7 +1,6 @@
 import React from 'react';
 // prettier-ignore
 import {Menu, CalculatorComponents, Graph2DComponent, Graph3DComponent } from './components';
-import UIComponent from './components/Graph2D/UI/UIComponent';
 import './App.css';
 
 class App extends React.Component {
@@ -23,7 +22,7 @@ class App extends React.Component {
           <CalculatorComponents />
         ) : this.state.showMenuItem === 'graph2D' ? (
           <div>
-          <Graph2DComponent />
+            <Graph2DComponent />
           </div>
         ) : this.state.showMenuItem === 'graph3D' ? (
           <Graph3DComponent />

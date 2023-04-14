@@ -10,9 +10,15 @@ export default class Menu extends React.Component {
   render() {
     return (
       <div className="menu">
-        <button onClick={() => this.showMenuItem('calc')}>Калькулятор</button>
-        <button onClick={() => this.showMenuItem('graph2D')}>2D График</button>
-        <button onClick={() => this.showMenuItem('graph3D')}>3D График</button>
+        <button className="showMenuItem" onClick={() => this.showMenuItem('calc')}>
+          Калькулятор
+        </button>
+        <button className="showMenuItem" onClick={() => this.showMenuItem('graph2D')}>
+          2D График
+        </button>
+        <button className="showMenuItem" onClick={() => this.showMenuItem('graph3D')}>
+          3D График
+        </button>
       </div>
     );
   }

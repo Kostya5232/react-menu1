@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +35,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.menu {
+  display: flex;
+  margin-top: 0px;
+}
+.showMenuItem {
+  border: 5px solid red;
+  border-radius: 5px;
+  background-color: rgb(206, 155, 155);
+  width: 100%;
+  text-align: center;
+  height: 70px;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.showMenuItem:hover {
+  background-color: rgb(255, 255, 255);
+}
+.flex {
+  display: flex;
 }

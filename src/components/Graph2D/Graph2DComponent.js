@@ -2,6 +2,7 @@ import React from 'react';
 import Canvas from '../../modules/Canvas/Canvas';
 import FuncMath from './FuncMath';
 import UIComponent from './UI/UIComponent';
+import './styleCanvas.css';
 
 class Graph2DComponent extends React.Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class Graph2DComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="flex">
         <div className="canvas">
           <canvas id="canvas"></canvas>
         </div>
