@@ -21,7 +21,6 @@ class ParamsComponent extends React.Component {
     this.i++;
     this.scene = [new Figure()];
     this.callbacks = props.callbacks;
-    //this._addEventListeners();
   }
   _addEventListeners() {
     const figure = document.getElementById('figures');
@@ -41,7 +40,7 @@ class ParamsComponent extends React.Component {
     this.callbacks.checkbox(name);
   }
   animation(figure, i) {
-    if (figure.constructor.name == 'Figure') {
+    if (figure.constructor.name === 'Figure') {
       return;
     }
     const animOption = document.querySelector(`#animOptions${i}`);
@@ -54,9 +53,9 @@ class ParamsComponent extends React.Component {
     figure.dropAnimation();
     str.forEach((elem) => {
       if (
-        (elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') &&
+        (elem[0] === 'rotateOx' || elem[0] === 'rotateOy' || elem[0] === 'rotateOz') &&
         !isNaN(elem[1]) &&
-        elem.length == 2
+        elem.length === 2
       ) {
         figure.setAnimation(elem[0], elem[1] - 0);
       }
@@ -71,9 +70,9 @@ class ParamsComponent extends React.Component {
       figure.dropAnimation();
       str.forEach((elem) => {
         if (
-          (elem[0] == 'rotateOx' || elem[0] == 'rotateOy' || elem[0] == 'rotateOz') &&
+          (elem[0] === 'rotateOx' || elem[0] === 'rotateOy' || elem[0] === 'rotateOz') &&
           !isNaN(elem[1]) &&
-          elem.length == 2
+          elem.length === 2
         ) {
           figure.setAnimation(elem[0], elem[1] - 0);
         }
@@ -83,7 +82,7 @@ class ParamsComponent extends React.Component {
   applyParam(figure, k) {
     this.scene[k] = figure;
     for (let i = 0; i < this.scene.length; i++) {
-      if (this.scene[i].points.length != 0 && i != k) {
+      if (this.scene[i].points.length !== 0 && i !== k) {
         const value = this.scene[i].constructor.name;
         const inputs = document.querySelectorAll(`.${value}${i}`);
         const color = document.querySelector(`#color${value}${i}`).value;
@@ -109,7 +108,7 @@ class ParamsComponent extends React.Component {
   createElement() {
     this.value = document.getElementById('figures').value;
     console.log('create');
-    if (this.value == 'SolarSystem') {
+    if (this.value === 'SolarSystem') {
       document.querySelectorAll('.paramsFigures').forEach((elem) => elem.remove());
       this.solarSystem();
       this.scene = [new Figure()];
@@ -190,23 +189,27 @@ class ParamsComponent extends React.Component {
     paramC.classList.add('hide');
     paramBDiscpt.classList.add('hide');
     paramCDiscpt.classList.add('hide');
-    if (this.value == 'Cube') {
+    if (this.value === 'Cube') {
       paramA.classList.add('hide');
       paramCount.classList.add('hide');
       countDiscpt.classList.add('hide');
     }
     if (
-      this.value == 'Tor' ||
-      this.value == 'HyperbolicParaboloid' ||
-      this.value == 'Cylinder' ||
-      this.value == 'EllipticalParabaloid' ||
-      this.value == 'ParabalidCylinder' ||
-      this.value == 'HyperbolicCylinder'
+      this.value === 'Tor' ||
+      this.value === 'HyperbolicParaboloid' ||
+      this.value === 'Cylinder' ||
+      this.value === 'EllipticalParabaloid' ||
+      this.value === 'ParabalidCylinder' ||
+      this.value === 'HyperbolicCylinder'
     ) {
       paramB.classList.remove('hide');
       paramBDiscpt.classList.remove('hide');
     }
-    if (this.value == 'Ellipsoid' || this.value == 'TwoWayHyperboloid' || this.value == 'OneWayHyperboloid') {
+    if (
+      this.value === 'Ellipsoid' ||
+      this.value === 'TwoWayHyperboloid' ||
+      this.value === 'OneWayHyperboloid'
+    ) {
       paramB.classList.remove('hide');
       paramC.classList.remove('hide');
       paramBDiscpt.classList.remove('hide');
