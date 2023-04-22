@@ -50,6 +50,7 @@ class Graph3DComponent extends React.Component {
         applyParam: (scene, i) => this.applyParam(scene),
         DelParam: (i) => this.DelParam(i),
         checkbox: (name) => this.checkbox(name),
+        mouseMove: (event) => this.mouseMove(event),
       },
     });
     this.FPS = 0;

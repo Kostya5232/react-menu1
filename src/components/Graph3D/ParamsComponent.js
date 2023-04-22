@@ -22,20 +22,6 @@ class ParamsComponent extends React.Component {
     this.scene = [new Figure()];
     this.callbacks = props.callbacks;
   }
-  _addEventListeners() {
-    const figure = document.getElementById('figures');
-    figure.addEventListener('change', () => {
-      let value = document.getElementById('figures').value;
-      this.value = value;
-      this.createElement();
-    });
-
-    document.querySelectorAll('.checkboxGraph').forEach((elem) => {
-      elem.addEventListener('click', (evt) => {
-        this.checkbox(evt.target.value);
-      });
-    });
-  }
   checkbox(name) {
     this.callbacks.checkbox(name);
   }
@@ -43,6 +29,7 @@ class ParamsComponent extends React.Component {
     if (figure.constructor.name === 'Figure') {
       return;
     }
+
     const animOption = document.querySelector(`#animOptions${i}`);
     let str = animOption.value.split(',');
     const c = [];
@@ -100,14 +87,11 @@ class ParamsComponent extends React.Component {
       }
       this.animation(this.scene[i], i);
     }
-    console.log(this);
-    console.log(this.scene);
     this.callbacks.applyParam(this.scene);
   }
 
   createElement() {
     this.value = document.getElementById('figures').value;
-    console.log('create');
     if (this.value === 'SolarSystem') {
       document.querySelectorAll('.paramsFigures').forEach((elem) => elem.remove());
       this.solarSystem();
@@ -254,7 +238,7 @@ class ParamsComponent extends React.Component {
       })
     );
 
-    document.getElementById(`color${this.value}${numberFigur}`).addEventListener('change', () => {
+    document.getElementById(`color${this.value}${numberFigur}`).addEventListener('input', () => {
       this.applyParam(
         this.figuresChanger(
           value,
