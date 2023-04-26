@@ -45,9 +45,7 @@ class Calculator {
 
   getMatrix(str) {
     const arr = str.slice(1, str.length - 1).split('|');
-    return new Matrix(
-      arr.map((elems) => elems.split(';').map((elem) => this.getEntity(elem)))
-    );
+    return new Matrix(arr.map((elems) => elems.split(';').map((elem) => this.getEntity(elem))));
   }
 
   getEntity(str) {
@@ -113,12 +111,9 @@ class Calculator {
   }
 
   get(elem) {
-    if (elem instanceof Matrix)
-      return new MatrixCalculator(this.get(elem.values[0][0]));
-    if (elem instanceof Vector)
-      return new VectorCalculator(this.get(elem.values[0]));
-    if (elem instanceof Polynomial)
-      return new PolynomialCalculator(this.get(elem.values[0]));
+    if (elem instanceof Matrix) return new MatrixCalculator(this.get(elem.values[0][0]));
+    if (elem instanceof Vector) return new VectorCalculator(this.get(elem.values[0]));
+    if (elem instanceof Polynomial) return new PolynomialCalculator(this.get(elem.values[0]));
     return new ComplexCalculator();
   }
 }

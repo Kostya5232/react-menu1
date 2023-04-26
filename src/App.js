@@ -1,37 +1,27 @@
-import React from 'react';
+import { useState } from 'react';
 // prettier-ignore
 import {Menu, CalculatorComponents, Graph2DComponent, Graph3DComponent } from './components';
 import './App.css';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [showMenuItem, setShowMenuItem] = useState('graph3D');
 
-    this.state = { showMenuItem: 'graph3D' };
-  }
-
-  showMenuItem(name) {
-    this.setState({ showMenuItem: name });
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <Menu showMenuItem={(name) => this.showMenuItem(name)} />
-        {this.state.showMenuItem === 'calc' ? (
-          <CalculatorComponents />
-        ) : this.state.showMenuItem === 'graph2D' ? (
-          <div>
-            <Graph2DComponent />
-          </div>
-        ) : this.state.showMenuItem === 'graph3D' ? (
-          <Graph3DComponent />
-        ) : (
-          <></>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <Menu showMenuItem={setShowMenuItem} />
+      {showMenuItem === 'calc' ? (
+        <CalculatorComponents />
+      ) : showMenuItem === 'graph2D' ? (
+        <div>
+          <Graph2DComponent />
+        </div>
+      ) : showMenuItem === 'graph3D' ? (
+        <Graph3DComponent />
+      ) : (
+        <></>
+      )}
+    </div>
+  );
+};
 
 export default App;

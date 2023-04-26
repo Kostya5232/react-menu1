@@ -1,37 +1,31 @@
-import React from 'react';
+import { useState } from 'react';
+import MyCheckbox from './MyCheckbox';
 
-export default class Graph3DUI extends React.Component {
-  constructor(props) {
-    super(props);
+const Graph3DUI = ({ show, showHidePoints, showHideEdges, showHidePolygons }) => {
+  const [showPanel, setShowPanel] = useState(false);
 
-    this.showHidePoints = props.showHidePoints;
-    this.showHideEdges = props.showHideEdges;
-    this.showHidePolygons = props.showHidePolygons;
+  const showHidePanel = () => setShowPanel(!showPanel);
 
-    this.state = { showPanel: false };
-  }
-
-  showHidePanel() {
-    this.setState({ showPanel: !this.state.showPanel });
-  }
-
-  render() {
-    return (
-      <div className="flex">
-        <button onClick={() => this.showHidePanel()}>{this.state.showPanel ? '🔙' : '🔜'}</button>
-        <div id="Checkbox3D">
-          {this.state.showPanel && (
-            <div>
-              <input
-                id="points-checkbox"
-                type="checkbox"
-                onClick={(event) => this.showHidePoints(event.target.checked)}
-                defaultChecked
-              ></input>
-              <label htmlFor="points-checkbox">Точки</label>
-            </div>
-          )}
-          {this.state.showPanel && (
+  return (
+    <div className="flex">
+      <button onClick={showHidePanel}>{showPanel ? '🔙' : '🔜'}</button>
+      <div id="Checkbox3D">
+        {showPanel && (
+          <div>
+            <MyCheckbox text={'Точки'} checked={show.showPoints} onClick={showHidePoints} />
+          </div>
+        )}
+        {showPanel && (
+          <div>
+            <MyCheckbox text={'Грани'} checked={show.showEdges} onClick={showHideEdges} />
+          </div>
+        )}
+        {showPanel && (
+          <div>
+            <MyCheckbox text={'Полингоны'} checked={show.showPolygons} onClick={showHidePolygons} />
+          </div>
+        )}
+        {/* {this.state.showPanel && (
             <div>
               <input
                 id="edges-checkbox"
@@ -52,9 +46,10 @@ export default class Graph3DUI extends React.Component {
               ></input>
               <label htmlFor="polygons-checkbox">Грани</label>
             </div>
-          )}
-        </div>
+          )} */}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Graph3DUI;
