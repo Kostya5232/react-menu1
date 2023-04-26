@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
 import MyCheckbox from './MyCheckbox';
 
 const Graph3DUI = ({ show, showHidePoints, showHideEdges, showHidePolygons }) => {
   const [showPanel, setShowPanel] = useState(false);
 
-  const showHidePanel = () => setShowPanel(!showPanel);
+  const showHidePanel = useCallback(() => {
+    setShowPanel(!showPanel);
+  }, [setShowPanel, showPanel]);
 
   return (
     <div className="flex">
@@ -12,41 +14,19 @@ const Graph3DUI = ({ show, showHidePoints, showHideEdges, showHidePolygons }) =>
       <div id="Checkbox3D">
         {showPanel && (
           <div>
-            <MyCheckbox text={'Точки'} checked={show.showPoints} onClick={showHidePoints} />
+            <MyCheckbox text={'Точки'} checked={true} onClick={showHidePoints} />
           </div>
         )}
         {showPanel && (
           <div>
-            <MyCheckbox text={'Грани'} checked={show.showEdges} onClick={showHideEdges} />
+            <MyCheckbox text={'Грани'} checked={true} onClick={showHideEdges} />
           </div>
         )}
         {showPanel && (
           <div>
-            <MyCheckbox text={'Полингоны'} checked={show.showPolygons} onClick={showHidePolygons} />
+            <MyCheckbox text={'Полингоны'} checked={true} onClick={showHidePolygons} />
           </div>
         )}
-        {/* {this.state.showPanel && (
-            <div>
-              <input
-                id="edges-checkbox"
-                type="checkbox"
-                onClick={(event) => this.showHideEdges(event.target.checked)}
-                defaultChecked
-              ></input>
-              <label htmlFor="edges-checkbox">Грани</label>
-            </div>
-          )}
-          {this.state.showPanel && (
-            <div>
-              <input
-                id="polygons-checkbox"
-                type="checkbox"
-                onClick={(event) => this.showHidePolygons(event.target.checked)}
-                defaultChecked
-              ></input>
-              <label htmlFor="polygons-checkbox">Грани</label>
-            </div>
-          )} */}
       </div>
     </div>
   );

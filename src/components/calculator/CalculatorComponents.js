@@ -1,23 +1,31 @@
-import React from 'react';
+import { useRef } from 'react';
+import useCalculator from './useCalculator';
 import { Calculator, PolynomialCalculator } from '../calculator';
 import './styleCalc.css';
-class CalculatorComponents extends React.Component {
-  constructor(props) {
-    super(props);
+const CalculatorComponents = () => {
+  const refA = useRef(null);
+  const refB = useRef(null);
+  const refC = useRef(null);
+  const calc = new useCalculator(refA, refB, refC);
 
-    this.calculator = new Calculator();
-  }
+  const operandHandlerCalc = (operand) => {
+    if (refA && refB && refC) {
+      const A = refA.current.value;
+      const B = refB.current.value;
+      refC.current.value = calc[operand](calc.getEntity(A), calc.getEntity(B));
+    }
+  };
 
-  operandHandlerCalc(operand) {
-    const inputA = document.getElementById('inputA');
-    const inputB = document.getElementById('inputB');
-    let a = this.calculator.getEntity(inputA.value);
-    let b = this.calculator.getEntity(inputB.value);
-    const c = this.calculator[operand](a, b);
-    document.getElementById('CalcResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
-  }
+  // operandHandlerCalc(operand) {
+  //   const inputA = document.getElementById('inputA');
+  //   const inputB = document.getElementById('inputB');
+  //   let a = this.calculator.getEntity(inputA.value);
+  //   let b = this.calculator.getEntity(inputB.value);
+  //   const c = this.calculator[operand](a, b);
+  //   document.getElementById('CalcResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
+  // }
 
-  operandHandlerPoly(operand) {
+  const operandHandlerPoly = (operand) => {
     const calc = new PolynomialCalculator();
     const inputP1 = document.getElementById('p1');
     const inputP2 = document.getElementById('p2');
@@ -25,9 +33,9 @@ class CalculatorComponents extends React.Component {
     const b = calc.getPolynomial(inputP2.value);
     const c = calc[operand](a, b);
     document.getElementById('PolyResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
-  }
+  };
 
-  operandHandlerResult() {
+  const operandHandlerResult = () => {
     const calc = new PolynomialCalculator();
     const a = calc.getPolynomial(document.getElementById('p1').value);
     const inputX = document.getElementById('inputX');
@@ -36,30 +44,29 @@ class CalculatorComponents extends React.Component {
     if (a) {
       res.innerHTML = a.getValue(x).toString();
     }
-  }
+  };
 
   // prettier-ignore
-  render() {
-    return (
+  return (
       <div id='calc'>
         <div id="CommCalculater">
           <div className="Calculator">
               <h1>Калькулятор</h1>
               <div id="Inputs">
-                  <textarea id="inputA" className = 'inputCalc' placeholder="Первое число"></textarea>
-                  <textarea id="inputB" className = 'inputCalc' placeholder="Второе число"></textarea>
+                  <textarea ref={refA} className = 'inputCalc' placeholder="Первое число"></textarea>
+                  <textarea ref={refB} className = 'inputCalc' placeholder="Второе число"></textarea>
               </div>
               <div id="container">
-                  <button className="operand-calc" data-operand="add" onClick={() => this.operandHandlerCalc('add')}>add</button>
-                  <button className="operand-calc" data-operand="sub" onClick={() => this.operandHandlerCalc('sub')}>sub</button>
-                  <button className="operand-calc" data-operand="mult" onClick={() => this.operandHandlerCalc('mult')}>mult</button>
-                  <button className="operand-calc" data-operand="div" onClick={() => this.operandHandlerCalc('div')}>div</button>
-                  <button className="operand-calc" data-operand="prod" onClick={() => this.operandHandlerCalc('prod')}>prod</button>
-                  <button className="operand-calc" data-operand="pow" onClick={() => this.operandHandlerCalc('pow')}>pow</button>
-                  <button className="operand-calc" data-operand="one" onClick={() => this.operandHandlerCalc('one')}>one</button>
-                  <button className="operand-calc" data-operand="zero" onClick={() => this.operandHandlerCalc('zero')}>zero</button>
+                  <button className="operand-calc" data-operand="add" onClick={calc('add')}>add</button>
+                  <button className="operand-calc" data-operand="sub" onClick={calc('sub')}>sub</button>
+                  <button className="operand-calc" data-operand="mult" onClick={calc('mult')}>mult</button>
+                  <button className="operand-calc" data-operand="div" onClick={calc('div')}>div</button>
+                  <button className="operand-calc" data-operand="prod" onClick={calc('prod')}>prod</button>
+                  <button className="operand-calc" data-operand="pow" onClick={calc('pow')}>pow</button>
+                  <button className="operand-calc" data-operand="one" onClick={calc('one')}>one</button>
+                  <button className="operand-calc" data-operand="zero" onClick={calc('zero')}>zero</button>
               </div>
-              <textarea id="CalcResult" placeholder="Ответ"></textarea>
+              <textarea ref={refC} placeholder="Ответ"></textarea>
           </div>
         </div>
         <div id="PolyCalculater">
@@ -71,22 +78,21 @@ class CalculatorComponents extends React.Component {
                 <textarea type="number" id="inputX" placeholder="Значение x"></textarea>
             </div>
             <div>
-                <button className="operand-poly" data-operand="add" onClick={() => this.operandHandlerPoly('add')}>+</button>
-                <button className="operand-poly" data-operand="sub" onClick={() => this.operandHandlerPoly('sub')}>-</button>
-                <button className="operand-poly" data-operand="mult" onClick={() => this.operandHandlerPoly('mult')}>*</button>
+                <button className="operand-poly" data-operand="add" onClick={operandHandlerPoly('add')}>+</button>
+                <button className="operand-poly" data-operand="sub" onClick={operandHandlerPoly('sub')}>-</button>
+                <button className="operand-poly" data-operand="mult" onClick={operandHandlerPoly('mult')}>*</button>
                 </div>
                 <div id="res"></div>
                 
                 <textarea id="PolyResult" placeholder="Ответ"></textarea>
             <div>
-                <button className="operand-result" data-operand="point" onClick={() => this.operandHandlerResult('point')}>Point</button>
+                <button className="operand-result" data-operand="point" onClick={operandHandlerResult('point')}>Point</button>
             </div>
         </div>
         </div>
       </div>
     );
-  }
   // ...
-}
+};
 
 export default CalculatorComponents;
