@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 // prettier-ignore
 import {Menu, CalculatorComponents, Graph2DComponent, Graph3DComponent } from './components';
 import './App.css';
