@@ -14,37 +14,6 @@ const CalculatorComponents = () => {
     const refPolyD = useRef(null);
     const calc = useCalculator(refA, refB, refC);
     const calcPoly = usePolyCalculator(refPolyA, refPolyB, refPolyC, refPolyD);
-    console.log(calcPoly);
-    // operandHandlerCalc(operand) {
-    //   const inputA = document.getElementById('inputA');
-    //   const inputB = document.getElementById('inputB');
-    //   let a = this.calculator.getEntity(inputA.value);
-    //   let b = this.calculator.getEntity(inputB.value);
-    //   const c = this.calculator[operand](a, b);
-    //   document.getElementById('CalcResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
-    // }
-
-    // const operandHandlerPoly = (operand) => {
-    //     const calc = new PolynomialCalculator();
-    //     const inputP1 = document.getElementById("p1");
-    //     const inputP2 = document.getElementById("p2");
-    //     const a = calc.getPolynomial(inputP1.value);
-    //     const b = calc.getPolynomial(inputP2.value);
-    //     const c = calc[operand](a, b);
-    //     document.getElementById("PolyResult").innerHTML = c ? c.toString() : "Ошибка!!!";
-    // };
-
-    // const operandHandlerResult = () => {
-    //     const calc = new PolynomialCalculator();
-    //     const a = calc.getPolynomial(document.getElementById("p1").value);
-    //     const inputX = document.getElementById("inputX");
-    //     const x = new Calculator().getEntity(inputX.value);
-    //     const res = document.querySelector("#res");
-    //     if (a) {
-    //         res.innerHTML = a.getValue(x).toString();
-    //     }
-    // };
-
     // prettier-ignore
     return (
       <div id='calc'>
@@ -89,7 +58,6 @@ const CalculatorComponents = () => {
         </div>
       </div>
     );
-    // ...
 };
 
 export default CalculatorComponents;
