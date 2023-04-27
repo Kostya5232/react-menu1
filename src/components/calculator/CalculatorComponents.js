@@ -6,15 +6,11 @@ const CalculatorComponents = () => {
   const refA = useRef(null);
   const refB = useRef(null);
   const refC = useRef(null);
-  const calc = new useCalculator(refA, refB, refC);
-
-  const operandHandlerCalc = (operand) => {
-    if (refA && refB && refC) {
-      const A = refA.current.value;
-      const B = refB.current.value;
-      refC.current.value = calc[operand](calc.getEntity(A), calc.getEntity(B));
-    }
-  };
+  const refPolyA = useRef(null);
+  const refPolyB = useRef(null);
+  const refPolyC = useRef(null);
+  const calc = useCalculator(refA, refB, refC);
+  const calcPoly = useCalculator(refPolyA, refPolyB, refPolyC);
 
   // operandHandlerCalc(operand) {
   //   const inputA = document.getElementById('inputA');
@@ -53,40 +49,40 @@ const CalculatorComponents = () => {
           <div className="Calculator">
               <h1>Калькулятор</h1>
               <div id="Inputs">
-                  <textarea ref={refA} className = 'inputCalc' placeholder="Первое число"></textarea>
-                  <textarea ref={refB} className = 'inputCalc' placeholder="Второе число"></textarea>
+                  <textarea ref={refA} className = 'inputCalc' placeholder="Первое число"/>
+                  <textarea ref={refB} className = 'inputCalc' placeholder="Второе число"/>
               </div>
               <div id="container">
-                  <button className="operand-calc" data-operand="add" onClick={calc('add')}>add</button>
-                  <button className="operand-calc" data-operand="sub" onClick={calc('sub')}>sub</button>
-                  <button className="operand-calc" data-operand="mult" onClick={calc('mult')}>mult</button>
-                  <button className="operand-calc" data-operand="div" onClick={calc('div')}>div</button>
-                  <button className="operand-calc" data-operand="prod" onClick={calc('prod')}>prod</button>
-                  <button className="operand-calc" data-operand="pow" onClick={calc('pow')}>pow</button>
-                  <button className="operand-calc" data-operand="one" onClick={calc('one')}>one</button>
-                  <button className="operand-calc" data-operand="zero" onClick={calc('zero')}>zero</button>
+                  <button className="operand-calc" data-operand="add" onClick={() =>calc('add')}>add</button>
+                  <button className="operand-calc" data-operand="sub" onClick={() =>calc('sub')}>sub</button>
+                  <button className="operand-calc" data-operand="mult" onClick={() =>calc('mult')}>mult</button>
+                  <button className="operand-calc" data-operand="div" onClick={() =>calc('div')}>div</button>
+                  <button className="operand-calc" data-operand="prod" onClick={() =>calc('prod')}>prod</button>
+                  <button className="operand-calc" data-operand="pow" onClick={() =>calc('pow')}>pow</button>
+                  <button className="operand-calc" data-operand="one" onClick={() =>calc('one')}>one</button>
+                  <button className="operand-calc" data-operand="zero" onClick={() =>calc('zero')}>zero</button>
               </div>
-              <textarea ref={refC} placeholder="Ответ"></textarea>
+              <textarea ref={refC} placeholder="Ответ"/>
           </div>
         </div>
         <div id="PolyCalculater">
         <div className="Polynomial">
             <h1>Полиномы</h1>
             <div id="Inputs">
-                <textarea id="p1" className = 'inputCalc' placeholder="Первый полином"></textarea>
-                <textarea id="p2" className = 'inputCalc' placeholder="Второй полином"></textarea>
+                <textarea ref={refPolyA} className = 'inputCalc' placeholder="Первый полином"></textarea>
+                <textarea ref={refPolyB} className = 'inputCalc' placeholder="Второй полином"></textarea>
                 <textarea type="number" id="inputX" placeholder="Значение x"></textarea>
             </div>
             <div>
-                <button className="operand-poly" data-operand="add" onClick={operandHandlerPoly('add')}>+</button>
-                <button className="operand-poly" data-operand="sub" onClick={operandHandlerPoly('sub')}>-</button>
-                <button className="operand-poly" data-operand="mult" onClick={operandHandlerPoly('mult')}>*</button>
+                <button className="operand-poly" data-operand="add" onClick={() =>calcPoly('add')}>+</button>
+                <button className="operand-poly" data-operand="sub" onClick={() =>calcPoly('sub')}>-</button>
+                <button className="operand-poly" data-operand="mult" onClick={() =>calcPoly('mult')}>*</button>
                 </div>
-                <div id="res"></div>
+                <div ref={refPolyC}></div>
                 
                 <textarea id="PolyResult" placeholder="Ответ"></textarea>
             <div>
-                <button className="operand-result" data-operand="point" onClick={operandHandlerResult('point')}>Point</button>
+                <button className="operand-result" data-operand="point" onClick={() =>calc('point')}>Point</button>
             </div>
         </div>
         </div>

@@ -12,9 +12,7 @@ class PolynomialCalculator {
       const arr = str.split('+');
       const arr2 = arr.map((elem) => elem.split('-'));
       for (let i = 0; i < arr2.length; i++) {
-        arr2[i] = arr2[i].map((elem, index) =>
-          elem && index ? `-${elem}` : elem
-        );
+        arr2[i] = arr2[i].map((elem, index) => (elem && index ? `-${elem}` : elem));
       }
       const arr3 = arr2.reduce((S, arr) => S.concat(arr), []);
       return new Polynomial(arr3.map((elem) => this.getMember(elem)));
@@ -42,12 +40,7 @@ class PolynomialCalculator {
     a.poly.forEach((elemA) => {
       const member = b.poly.find((elemB) => elemB.power === elemA.power);
       if (member) {
-        members.push(
-          new Member(
-            calc.add(new Complex(elemA.value), new Complex(member.value)),
-            elemA.power
-          )
-        );
+        members.push(new Member(calc.add(new Complex(elemA.value), new Complex(member.value)), elemA.power));
       } else {
         members.push(new Member(elemA.value, elemA.power));
       }
@@ -66,12 +59,7 @@ class PolynomialCalculator {
     a.poly.forEach((elemA) => {
       const member = b.poly.find((elemB) => elemB.power === elemA.power);
       if (member) {
-        members.push(
-          new Member(
-            calc.sub(new Complex(elemA.value), new Complex(member.value)),
-            elemA.power
-          )
-        );
+        members.push(new Member(calc.sub(new Complex(elemA.value), new Complex(member.value)), elemA.power));
       } else {
         members.push(new Member(elemA.value, elemA.power));
       }
@@ -92,10 +80,7 @@ class PolynomialCalculator {
       const members = [];
       b.poly.forEach((elemB) => {
         members.push(
-          new Member(
-            calc.mult(new Complex(elemA.value), new Complex(elemB.value)),
-            elemA.power + elemB.power
-          )
+          new Member(calc.mult(new Complex(elemA.value), new Complex(elemB.value)), elemA.power + elemB.power)
         );
       });
       polynomial = this.add(polynomial, this.polynomial(members));
