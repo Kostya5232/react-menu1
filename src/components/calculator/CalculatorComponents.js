@@ -1,49 +1,21 @@
-import { useRef } from 'react';
-import useCalculator from './useCalculator';
-import { Calculator, PolynomialCalculator } from '../calculator';
-import './styleCalc.css';
+import { useRef } from "react";
+import useCalculator from "./useCalculator";
+import usePolyCalculator from "./usePolyCalculator";
+
+//import { Calculator, PolynomialCalculator } from "../calculator";
+import "./styleCalc.css";
 const CalculatorComponents = () => {
-  const refA = useRef(null);
-  const refB = useRef(null);
-  const refC = useRef(null);
-  const refPolyA = useRef(null);
-  const refPolyB = useRef(null);
-  const refPolyC = useRef(null);
-  const calc = useCalculator(refA, refB, refC);
-  const calcPoly = useCalculator(refPolyA, refPolyB, refPolyC);
-
-  // operandHandlerCalc(operand) {
-  //   const inputA = document.getElementById('inputA');
-  //   const inputB = document.getElementById('inputB');
-  //   let a = this.calculator.getEntity(inputA.value);
-  //   let b = this.calculator.getEntity(inputB.value);
-  //   const c = this.calculator[operand](a, b);
-  //   document.getElementById('CalcResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
-  // }
-
-  const operandHandlerPoly = (operand) => {
-    const calc = new PolynomialCalculator();
-    const inputP1 = document.getElementById('p1');
-    const inputP2 = document.getElementById('p2');
-    const a = calc.getPolynomial(inputP1.value);
-    const b = calc.getPolynomial(inputP2.value);
-    const c = calc[operand](a, b);
-    document.getElementById('PolyResult').innerHTML = c ? c.toString() : 'Ошибка!!!';
-  };
-
-  const operandHandlerResult = () => {
-    const calc = new PolynomialCalculator();
-    const a = calc.getPolynomial(document.getElementById('p1').value);
-    const inputX = document.getElementById('inputX');
-    const x = new Calculator().getEntity(inputX.value);
-    const res = document.querySelector('#res');
-    if (a) {
-      res.innerHTML = a.getValue(x).toString();
-    }
-  };
-
-  // prettier-ignore
-  return (
+    const refA = useRef(null);
+    const refB = useRef(null);
+    const refC = useRef(null);
+    const refPolyA = useRef(null);
+    const refPolyB = useRef(null);
+    const refPolyC = useRef(null);
+    const refPolyD = useRef(null);
+    const calc = useCalculator(refA, refB, refC);
+    const calcPoly = usePolyCalculator(refPolyA, refPolyB, refPolyC, refPolyD);
+    // prettier-ignore
+    return (
       <div id='calc'>
         <div id="CommCalculater">
           <div className="Calculator">
@@ -71,24 +43,21 @@ const CalculatorComponents = () => {
             <div id="Inputs">
                 <textarea ref={refPolyA} className = 'inputCalc' placeholder="Первый полином"></textarea>
                 <textarea ref={refPolyB} className = 'inputCalc' placeholder="Второй полином"></textarea>
-                <textarea type="number" id="inputX" placeholder="Значение x"></textarea>
+                <textarea ref={refPolyC} type="number" id="inputX" placeholder="Значение x"></textarea>
             </div>
             <div>
                 <button className="operand-poly" data-operand="add" onClick={() =>calcPoly('add')}>+</button>
                 <button className="operand-poly" data-operand="sub" onClick={() =>calcPoly('sub')}>-</button>
-                <button className="operand-poly" data-operand="mult" onClick={() =>calcPoly('mult')}>*</button>
-                </div>
-                <div ref={refPolyC}></div>
-                
-                <textarea id="PolyResult" placeholder="Ответ"></textarea>
+                <button className="operand-poly" data-operand="mult" onClick={() =>calcPoly('mult')}>*</button> 
+            </div>
+            <textarea ref ={refPolyD}  placeholder="Ответ"></textarea>
             <div>
-                <button className="operand-result" data-operand="point" onClick={() =>calc('point')}>Point</button>
+                <button className="operand-result" data-operand="point" onClick={() =>calcPoly('point')}>Point</button>
             </div>
         </div>
         </div>
       </div>
     );
-  // ...
 };
 
 export default CalculatorComponents;
