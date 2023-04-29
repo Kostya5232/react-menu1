@@ -1,14 +1,7 @@
-import {
-  ComplexCalculator,
-  MatrixCalculator,
-  PolynomialCalculator,
-  Vector,
-  Matrix,
-  Complex,
-  Polynomial,
-} from '../../calculator';
+import { Vector } from '../entitites';
+import ComplexCalculator from './ComplexCalculator';
 
-class VectorCalculator {
+export default class VectorCalculator {
   constructor(calc = new ComplexCalculator()) {
     this.calc = calc;
   }
@@ -73,18 +66,4 @@ class VectorCalculator {
     }
     return new Vector(values);
   }
-
-  get(a) {
-    return a instanceof Matrix
-      ? new MatrixCalculator()
-      : a instanceof Vector
-      ? new VectorCalculator()
-      : a instanceof Complex
-      ? new ComplexCalculator()
-      : a instanceof Polynomial
-      ? new PolynomialCalculator()
-      : new ComplexCalculator();
-  }
 }
-
-export default VectorCalculator;

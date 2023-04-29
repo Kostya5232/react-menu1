@@ -1,6 +1,7 @@
-import { Polynomial, Member, Calculator, Complex } from "../../calculator";
+import { Polynomial, Member, Complex } from "./entitites";
+import UniversalCalculator from "./UniversalCalculator";
 
-class PolynomialCalculator {
+export default class PolynomialCalculator {
     polynomial(members) {
         return new Polynomial(members);
     }
@@ -34,7 +35,7 @@ class PolynomialCalculator {
     }
 
     add(a, b) {
-        const calc = new Calculator();
+        const calc = new UniversalCalculator();
         const members = [];
         a.poly.forEach((elemA) => {
             const member = b.poly.find((elemB) => elemB.power === elemA.power);
@@ -53,7 +54,7 @@ class PolynomialCalculator {
     }
 
     sub(a, b) {
-        const calc = new Calculator();
+        const calc = new UniversalCalculator();
         const members = [];
         a.poly.forEach((elemA) => {
             const member = b.poly.find((elemB) => elemB.power === elemA.power);
@@ -73,7 +74,7 @@ class PolynomialCalculator {
     }
 
     mult(a, b) {
-        const calc = new Calculator();
+        const calc = new UniversalCalculator();
         let polynomial = this.polynomial();
         a.poly.forEach((elemA) => {
             const members = [];
@@ -85,5 +86,3 @@ class PolynomialCalculator {
         return polynomial;
     }
 }
-
-export default PolynomialCalculator;

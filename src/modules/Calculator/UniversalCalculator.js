@@ -1,15 +1,8 @@
-import {
-  Vector,
-  Matrix,
-  Complex,
-  MatrixCalculator,
-  VectorCalculator,
-  ComplexCalculator,
-  Polynomial,
-  PolynomialCalculator,
-} from '../../calculator';
+import { Complex, Vector, Matrix, Polynomial } from "./entitites";
+import { ComplexCalculator, VectorCalculator, MatrixCalculator } from "./calculators";
+import PolynomialCalculator from "./PolynomialCalculator";
 
-class Calculator {
+export default class UniversalCalculator {
   complex(re, im) {
     return new Complex(re, im);
   }
@@ -118,4 +111,3 @@ class Calculator {
   }
 }
 
-export default Calculator;

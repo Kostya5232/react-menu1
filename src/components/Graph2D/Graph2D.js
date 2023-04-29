@@ -4,7 +4,7 @@ import FuncMath from './FuncMath';
 import UIComponent from './UI/UIComponent';
 import './styleCanvas.css';
 
-class Graph2DComponent extends React.Component {
+class Graph2D extends React.Component {
   constructor(props) {
     super(props);
 
@@ -228,4 +228,4 @@ class Graph2DComponent extends React.Component {
   }
 }
 
-export default Graph2DComponent;
+export default Graph2D;

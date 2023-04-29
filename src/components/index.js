@@ -1,6 +1,6 @@
 import Menu from './Menu/Menu';
-import CalculatorComponents from './calculator';
-import Graph2DComponent from './Graph2D/Graph2DComponent';
-import Graph3DComponent from './Graph3D/Graph3DComponent';
+import Calculator from './Calculator/Calculator';
+import Graph2D from './Graph2D/Graph2D';
+import Graph3D from './Graph3D/Graph3D';
 
-export { Menu, CalculatorComponents, Graph2DComponent, Graph3DComponent };
+export { Menu, Calculator, Graph2D, Graph3D };

@@ -1,4 +1,4 @@
-class Complex {
+export default class Complex {
   constructor(re = 0, im = 0) {
     this.re = re;
     this.im = im;
@@ -13,5 +13,3 @@ class Complex {
     return `${this.re}${this.im > 0 ? `+i${this.im}` : `-i${-this.im}`}`;
   }
 }
-
-export default Complex;

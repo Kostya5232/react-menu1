@@ -1,6 +1,7 @@
-import { ComplexCalculator, Matrix, Complex } from '../CommonCalculator';
+import { Matrix, Complex } from '../entitites';
+import ComplexCalculator from './ComplexCalculator';
 
-class MatrixCalculator {
+export default class MatrixCalculator {
   constructor(calc = new ComplexCalculator()) {
     this.calc = calc;
   }
@@ -39,18 +40,15 @@ class MatrixCalculator {
           }
           if (a.values[i][k].im == 0 && b.values[k][j].im != 0) {
             s2 = s2 + a.values[i][k].re * b.values[k][j].im;
-            console.log(s2);
             s = s + a.values[i][k].re * b.values[k][j].re;
           }
           if (a.values[i][k].im != 0 && b.values[k][j].im == 0) {
             s2 = s2 + a.values[i][k].im * b.values[k][j].re;
-            console.log(s2);
             s = s + a.values[i][k].re * b.values[k][j].re;
           }
           if (a.values[i][k].im == 0 && b.values[k][j].im == 0) {
             s = s + a.values[i][k].re * b.values[k][j].re;
             s2 = s2;
-            console.log(s2);
           }
         }
 
@@ -97,5 +95,3 @@ class MatrixCalculator {
     return new Matrix(values);
   }
 }
-
-export default MatrixCalculator;

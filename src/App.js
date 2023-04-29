@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// prettier-ignore
-import {Menu, CalculatorComponents, Graph2DComponent, Graph3DComponent } from './components';
+import { Menu, Calculator, Graph2D, Graph3D } from './components';
+
 import './App.css';
 
 const App = () => {
@@ -9,17 +9,13 @@ const App = () => {
   return (
     <div className="App">
       <Menu showMenuItem={setShowMenuItem} />
-      {showMenuItem === 'calc' ? (
-        <CalculatorComponents />
-      ) : showMenuItem === 'graph2D' ? (
-        <div>
-          <Graph2DComponent />
-        </div>
-      ) : showMenuItem === 'graph3D' ? (
-        <Graph3DComponent />
-      ) : (
-        <></>
-      )}
+      {showMenuItem === 'calc' ?
+        <Calculator /> :
+        showMenuItem === 'graph2D' ?
+          <Graph2D /> :
+          showMenuItem === 'graph3D' ?
+            <Graph3D /> : <></>
+      }
     </div>
   );
 };
