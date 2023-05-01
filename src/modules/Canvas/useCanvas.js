@@ -1,6 +1,6 @@
 import Canvas from "./Canvas";
 
-export default function useCanvas(render = () => { }) {
+export default function useCanvas(render = () => {}) {
     window.requestAnimFrame = (function () {
         return (
             window.requestAnimationFrame ||
@@ -15,13 +15,14 @@ export default function useCanvas(render = () => { }) {
     })();
 
     let FPS = 0;
+    var outFPS = 0;
     let lastTimestamp = Date.now();
 
     const animLoop = () => {
         FPS++;
         const timestamp = Date.now();
         if (timestamp - lastTimestamp >= 1000) {
-            var outFPS = FPS;
+            outFPS = FPS;
             FPS = 0;
             lastTimestamp = timestamp;
         }
@@ -32,5 +33,5 @@ export default function useCanvas(render = () => { }) {
     return (params) => {
         animLoop();
         return new Canvas(params);
-    }
+    };
 }
