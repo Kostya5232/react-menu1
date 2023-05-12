@@ -49,13 +49,11 @@ export default class VectorCalculator {
     return c;
   }
 
-  one(length, elem) {
-    const calc = this.get(elem);
+  one(length) {
     const values = [];
     for (let i = 0; i < length; i++) {
-      values.push(calc.one());
+      values.push(this.calc.one());
     }
-
     return new Vector(values);
   }
 

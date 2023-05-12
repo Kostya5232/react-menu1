@@ -4,7 +4,7 @@ import useCanvas from "../../modules/Canvas/useCanvas";
 import ParamsComponent from "./ParamsComponent";
 import Graph3DUI from "./Graph3DUI";
 
-import "./styleCanvas3D.css";
+import "./Graph3D.css";
 
 export default function Graph3D() {
     const Canvas = useCanvas(renderScene);
