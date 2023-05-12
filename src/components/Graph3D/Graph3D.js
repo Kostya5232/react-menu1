@@ -62,8 +62,8 @@ export default function Graph3D() {
     }
     function mouseMove(event) {
         if (canRotate) {
-            scene.forEach((elem) =>
-                elem.points.forEach((point) => {
+            scene.forEach((figure) =>
+                figure.points.forEach((point) => {
                     const { movementX, movementY } = event;
                     math3D.transform(math3D.rotateOy(movementX / 180), point);
                     math3D.transform(math3D.rotateOx(movementY / 180), point);
@@ -114,17 +114,17 @@ export default function Graph3D() {
             });
         }
         if (edgesCheckbox) {
-            scene.forEach((elem) =>
-                elem.edges.forEach((edge) => {
-                    const point1 = elem.points[edge.p1];
-                    const point2 = elem.points[edge.p2];
+            scene.forEach((figure) =>
+                figure.edges.forEach((edge) => {
+                    const point1 = figure.points[edge.p1];
+                    const point2 = figure.points[edge.p2];
                     canvas.line(math3D.xs(point1), math3D.ys(point1), math3D.xs(point2), math3D.ys(point2));
                 })
             );
         }
         if (pointsCheckbox) {
-            scene.forEach((elem) =>
-                elem.points.forEach((point) => {
+            scene.forEach((figure) =>
+                figure.points.forEach((point) => {
                     canvas.point(math3D.xs(point), math3D.ys(point));
                 })
             );
