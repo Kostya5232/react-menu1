@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
-import useCalculator from "../../modules/Calculator/useCalculator";
-import usePolyCalculator from "../../modules/Calculator/usePolyCalculator";
+import useCalculator from "./hooks/useCalculator";
+import usePolyCalculator from "./hooks/usePolyCalculator";
 
 import "./Calculator.css";
 

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import Math3D, { Point, Light, Sphere } from "../../modules/Math3D";
 import useCanvas from "../../modules/Canvas/useCanvas";
-import ParamsComponent from "./ParamsComponent";
-import Graph3DUI from "./Graph3DUI";
+import FigureParams from "./FigureParams/FigureParams";
+import Graph3DUI from "./Graph3DUI/Graph3DUI";
 
 import "./Graph3D.css";
 
@@ -26,24 +26,19 @@ export default function Graph3D() {
     let polygonsCheckbox = true;
 
     const math3D = new Math3D({ WIN });
-    const Params = new ParamsComponent({
-        id: "ParamsComponent",
-        parent: "ParamsComponent",
-        callbacks: {
-            applyParam: (scene) => applyParam(scene),
-        },
-    });
 
-    const applyParam = (scene1) => {
-        scene = scene1;
+    const setScene = (_scene) => {
+        scene = _scene;
     };
 
     const showHidePoints = (value) => {
         pointsCheckbox = value;
     };
+
     const showHideEdges = (value) => {
         edgesCheckbox = value;
     };
+
     const showHidePolygons = (value) => {
         polygonsCheckbox = value;
     };
@@ -57,9 +52,11 @@ export default function Graph3D() {
     function mouseUp() {
         canRotate = false;
     }
+
     function mouseDown() {
         canRotate = true;
     }
+
     function mouseMove(event) {
         if (canRotate) {
             scene.forEach((figure) =>
@@ -152,6 +149,7 @@ export default function Graph3D() {
 
         return () => {
             clearInterval(interval);
+            canvas = null;
         };
     });
 
@@ -161,59 +159,9 @@ export default function Graph3D() {
                 <Graph3DUI showHidePoints={showHidePoints} showHideEdges={showHideEdges} showHidePolygons={showHidePolygons} />
                 <canvas id="canvas3D"></canvas>
             </div>
-            <div
-                className="selectFigur"
-                id="selectFigur"
-                onChange={() => {
-                    Params.createElement();
-                }}
-            >
-                <select id="figures">
-                    <option className="figur" value="void">
-                        Фигуры
-                    </option>
-                    <option className="figur" value="Cube">
-                        Куб
-                    </option>
-                    <option className="figur" value="Sphere">
-                        Сфера
-                    </option>
-                    <option className="figur" value="Cone">
-                        Конус
-                    </option>
-                    <option className="figur" value="Ellipsoid">
-                        Элипсоид
-                    </option>
-                    <option className="figur" value="Tor">
-                        Тор
-                    </option>
-                    <option className="figur" value="HyperbolicParaboloid">
-                        Седло
-                    </option>
-                    <option className="figur" value="Cylinder">
-                        Цилиндр
-                    </option>
-                    <option className="figur" value="OneWayHyperboloid">
-                        Однополосый гиперболоид
-                    </option>
-                    <option className="figur" value="TwoWayHyperboloid">
-                        Двухполосый гиперболоид
-                    </option>
-                    <option className="figur" value="EllipticalParabaloid">
-                        Эллиптический гиперболоид
-                    </option>
-                    <option className="figur" value="ParabalidCylinder">
-                        Параболический цилиндр
-                    </option>
-                    <option className="figur" value="HyperbolicCylinder">
-                        Гипербалический цилиндр{" "}
-                    </option>
-                    <option className="figur" value="SolarSystem">
-                        Солнечная система{" "}
-                    </option>
-                </select>
-                <div id="listParams"></div>
-            </div>
+            <FigureParams
+                setScene={setScene}
+            />
         </div>
     );
 }

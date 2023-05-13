@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
-import MyCheckbox from './MyCheckbox';
+import MyCheckbox from '../../components/MyCheckBox/MyCheckbox';
 
-const Graph3DUI = ({ show, showHidePoints, showHideEdges, showHidePolygons }) => {
+const Graph3DUI = ({ showHidePoints, showHideEdges, showHidePolygons }) => {
   const [showPanel, setShowPanel] = useState(false);
 
   const showHidePanel = useCallback(() => {
@@ -15,15 +15,7 @@ const Graph3DUI = ({ show, showHidePoints, showHideEdges, showHidePolygons }) =>
         {showPanel && (
           <div>
             <MyCheckbox text={'Точки'} checked={true} onClick={showHidePoints} />
-          </div>
-        )}
-        {showPanel && (
-          <div>
             <MyCheckbox text={'Грани'} checked={true} onClick={showHideEdges} />
-          </div>
-        )}
-        {showPanel && (
-          <div>
             <MyCheckbox text={'Полингоны'} checked={true} onClick={showHidePolygons} />
           </div>
         )}

@@ -1,4 +1,4 @@
-import UniversalCalculator, { PolynomialCalculator } from "../../modules/Calculator";
+import UniversalCalculator, { PolynomialCalculator } from "../../../modules/Calculator";
 
 export default function usePolyCalculator(refA, refB, refX, refC) {
     const calc = new UniversalCalculator();
