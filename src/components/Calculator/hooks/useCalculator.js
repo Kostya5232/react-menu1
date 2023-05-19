@@ -1,4 +1,4 @@
-import UniversalCalculator from ".";
+import UniversalCalculator from "../../../modules/Calculator";
 
 export default function useCalculator(refA, refB, refC) {
     const calc = new UniversalCalculator();

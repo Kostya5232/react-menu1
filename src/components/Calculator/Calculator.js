@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
-import useCalculator from "../../modules/Calculator/useCalculator";
-import usePolyCalculator from "../../modules/Calculator/usePolyCalculator";
+import useCalculator from "./hooks/useCalculator";
+import usePolyCalculator from "./hooks/usePolyCalculator";
 
 import "./Calculator.css";
 
@@ -25,30 +25,14 @@ const Calculator = () => {
                     <textarea ref={refB} className="inputCalc" placeholder="Второе число" />
                 </div>
                 <div>
-                    <button className="operand-calc" onClick={() => calc("add")}>
-                        add
-                    </button>
-                    <button className="operand-calc" onClick={() => calc("sub")}>
-                        sub
-                    </button>
-                    <button className="operand-calc" onClick={() => calc("mult")}>
-                        mult
-                    </button>
-                    <button className="operand-calc" onClick={() => calc("div")}>
-                        div
-                    </button>
-                    <button className="operand-calc" onClick={() => calc("prod")}>
-                        prod
-                    </button>
-                    <button className="operand-calc" onClick={() => calc("pow")}>
-                        pow
-                    </button>
-                    <button className="operand-calc" onClick={() => calc("one")}>
-                        one
-                    </button>
-                    <button className="operand-calc" onClick={() => calc("zero")}>
-                        zero
-                    </button>
+                    <button className="operand-calc" onClick={() => calc("add")}>add</button>
+                    <button className="operand-calc" onClick={() => calc("sub")}>sub</button>
+                    <button className="operand-calc" onClick={() => calc("mult")}>mult</button>
+                    <button className="operand-calc" onClick={() => calc("div")}>div</button>
+                    <button className="operand-calc" onClick={() => calc("prod")}>prod</button>
+                    <button className="operand-calc" onClick={() => calc("pow")}>pow</button>
+                    <button className="operand-calc" onClick={() => calc("one")}>one</button>
+                    <button className="operand-calc" onClick={() => calc("zero")}>zero</button>
                 </div>
                 <textarea ref={refC} placeholder="Ответ" />
             </div>

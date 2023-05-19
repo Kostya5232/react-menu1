@@ -1,21 +1,50 @@
-import React from "react";
-import {
-    Figure,
-    Cone,
-    Cube,
-    Cylinder,
-    Ellipsoid,
-    EllipticalParabaloid,
-    HyperbolicCylinder,
-    HyperbolicParaboloid,
-    OneWayHyperboloid,
-    ParabalidCylinder,
-    Sphere,
-    Tor,
-    TwoWayHyperboloid,
-} from "../../modules/Math3D";
-class ParamsComponent extends React.Component {
-    constructor(props) {
+import { useState, useCallback } from "react";
+
+import useGetFigure from "./useGetFigure";
+
+import CubeParams from "./figures/CubeParams";
+
+export default function FigureParams({ setScene }) {
+    const [figureName, setFigureName] = useState(null);
+
+    const getFigure = useGetFigure();
+
+    const selectFigureHandler = useCallback((event) => {
+        const scene = [getFigure(event.target.value)];
+        setScene(scene);
+        setFigureName(event.target.value);
+    }, [getFigure, setScene, setFigureName]);
+
+    return (
+        <div
+            className="selectFigur"
+            id="selectFigur"
+        >
+            <select 
+                id="figures"
+                onChange={selectFigureHandler}
+            >
+                <option className="figur" value="Cube">Куб</option>
+                <option className="figur" value="Sphere">Сфера</option>
+                <option className="figur" value="Cone">Конус</option>
+                <option className="figur" value="Ellipsoid">Элипсоид</option>
+                <option className="figur" value="Tor">Тор</option>
+                <option className="figur" value="HyperbolicParaboloid">Седло</option>
+                <option className="figur" value="Cylinder">Цилиндр</option>
+                <option className="figur" value="OneWayHyperboloid">Однополосый гиперболоид</option>
+                <option className="figur" value="TwoWayHyperboloid">Двухполосый гиперболоид</option>
+                <option className="figur" value="EllipticalParabaloid">Эллиптический гиперболоид</option>
+                <option className="figur" value="ParabalidCylinder">Параболический цилиндр</option>
+                <option className="figur" value="HyperbolicCylinder">Гипербалический цилиндр</option>
+                <option className="figur" value="SolarSystem">Солнечная система</option>
+            </select>
+            {figureName === 'Cube' ? 
+                <CubeParams getFigure={getFigure} figureName={figureName} setScene={setScene} /> : 
+            <></>
+            }
+        </div>);
+
+    /*constructor(props) {
         super(props);
         this.i = 0;
         this.i++;
@@ -40,7 +69,7 @@ class ParamsComponent extends React.Component {
         figure.dropAnimation();
         str.forEach((elem) => {
             if ((elem[0] === "rotateOx" || elem[0] === "rotateOy" || elem[0] === "rotateOz") && !isNaN(elem[1]) && elem.length === 2) {
-                figure.setAnimation(elem[0], elem[1] - 0);
+                figure.setAnimation(elem[0], (elem[1] - 0)/100);
             }
         });
         animOption.addEventListener("keyup", () => {
@@ -53,7 +82,7 @@ class ParamsComponent extends React.Component {
             figure.dropAnimation();
             str.forEach((elem) => {
                 if ((elem[0] === "rotateOx" || elem[0] === "rotateOy" || elem[0] === "rotateOz") && !isNaN(elem[1]) && elem.length === 2) {
-                    figure.setAnimation(elem[0], elem[1] - 0);
+                    figure.setAnimation(elem[0], (elem[1] - 0)/100);
                 }
             });
         });
@@ -151,7 +180,7 @@ class ParamsComponent extends React.Component {
         paramCount.setAttribute("class", `${this.value}${this.i}`);
 
         option.setAttribute("id", `animOptions${this.i}`);
-        option.setAttribute("placeholder", "rotateOx 0.11 , ...");
+        option.setAttribute("placeholder", "rotateOx 1 , ...");
 
         div.appendChild(descriptionFigur);
         div.appendChild(paramADiscpt);
@@ -379,7 +408,5 @@ class ParamsComponent extends React.Component {
 
         this.scene.push(sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune);
         this.callbacks.applyParam(this.scene);
-    }
+    }*/
 }
-
-export default ParamsComponent;

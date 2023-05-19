@@ -1,5 +1,6 @@
 const MyCheckbox = ({ text, checked, onClick }) => {
-  const id = `checkbox - ${Math.random()} `;
+  const id = `checkbox-${Math.random()}`;
+  
   return (
     <>
       <input

@@ -1,7 +1,8 @@
 import { Figure, Point, Edge, Polygon } from '../entities';
 
 class Cube extends Figure {
-  constructor(color = '#ff0000', x = 0, y = 0, z = 0) {
+  constructor(options = {}) {
+    const { color = '#ff0000', x = 0, y = 0, z = 0 } = options;
     const points = [
       new Point(10 + x, 10 + y, 10 + z),
       new Point(10 + x, -10 + y, 10 + z),
