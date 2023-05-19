@@ -3,46 +3,104 @@ import { useState, useCallback } from "react";
 import useGetFigure from "./useGetFigure";
 
 import CubeParams from "./figures/CubeParams";
+import SphereParams from "./figures/SphereParams";
+import ConeParams from "./figures/ConeParams";
+import CylinderParams from "./figures/CylinderParams";
+import EllipsoidParams from "./figures/EllipsoidParams";
+import EllipticalParabaloidParams from "./figures/EllipticalParabaloidParams";
+import HyperbolicCylinderParams from "./figures/HyperbolicCylinderParams";
+import HyperbolicParaboloidParams from "./figures/HyperbolicParaboloidParams";
+import OneWayHyperboloidParams from "./figures/OneWayHyperboloidParams";
+import ParabalidCylinderParams from "./figures/ParabalidCylinderParams";
+import TorParams from "./figures/TorParams";
+import TwoWayHyperboloidParams from "./figures/TwoWayHyperboloidParams";
 
 export default function FigureParams({ setScene }) {
     const [figureName, setFigureName] = useState(null);
 
     const getFigure = useGetFigure();
 
-    const selectFigureHandler = useCallback((event) => {
-        const scene = [getFigure(event.target.value)];
-        setScene(scene);
-        setFigureName(event.target.value);
-    }, [getFigure, setScene, setFigureName]);
+    const selectFigureHandler = useCallback(
+        (event) => {
+            const scene = [getFigure(event.target.value)];
+            setScene(scene);
+            setFigureName(event.target.value);
+        },
+        [getFigure, setScene, setFigureName]
+    );
 
     return (
-        <div
-            className="selectFigur"
-            id="selectFigur"
-        >
-            <select 
-                id="figures"
-                onChange={selectFigureHandler}
-            >
-                <option className="figur" value="Cube">Куб</option>
-                <option className="figur" value="Sphere">Сфера</option>
-                <option className="figur" value="Cone">Конус</option>
-                <option className="figur" value="Ellipsoid">Элипсоид</option>
-                <option className="figur" value="Tor">Тор</option>
-                <option className="figur" value="HyperbolicParaboloid">Седло</option>
-                <option className="figur" value="Cylinder">Цилиндр</option>
-                <option className="figur" value="OneWayHyperboloid">Однополосый гиперболоид</option>
-                <option className="figur" value="TwoWayHyperboloid">Двухполосый гиперболоид</option>
-                <option className="figur" value="EllipticalParabaloid">Эллиптический гиперболоид</option>
-                <option className="figur" value="ParabalidCylinder">Параболический цилиндр</option>
-                <option className="figur" value="HyperbolicCylinder">Гипербалический цилиндр</option>
-                <option className="figur" value="SolarSystem">Солнечная система</option>
+        <div className="selectFigur" id="selectFigur">
+            <select id="figures" onChange={selectFigureHandler}>
+                <option className="figur" value="Cube">
+                    Куб
+                </option>
+                <option className="figur" value="Sphere">
+                    Сфера
+                </option>
+                <option className="figur" value="Cone">
+                    Конус
+                </option>
+                <option className="figur" value="Ellipsoid">
+                    Элипсоид
+                </option>
+                <option className="figur" value="Tor">
+                    Тор
+                </option>
+                <option className="figur" value="HyperbolicParaboloid">
+                    Седло
+                </option>
+                <option className="figur" value="Cylinder">
+                    Цилиндр
+                </option>
+                <option className="figur" value="OneWayHyperboloid">
+                    Однополосый гиперболоид
+                </option>
+                <option className="figur" value="TwoWayHyperboloid">
+                    Двухполосый гиперболоид
+                </option>
+                <option className="figur" value="EllipticalParabaloid">
+                    Эллиптический гиперболоид
+                </option>
+                <option className="figur" value="ParabalidCylinder">
+                    Параболический цилиндр
+                </option>
+                <option className="figur" value="HyperbolicCylinder">
+                    Гипербалический цилиндр
+                </option>
+                <option className="figur" value="SolarSystem">
+                    Солнечная система
+                </option>
             </select>
-            {figureName === 'Cube' ? 
-                <CubeParams getFigure={getFigure} figureName={figureName} setScene={setScene} /> : 
-            <></>
-            }
-        </div>);
+            {figureName === "Cube" ? (
+                <CubeParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "Sphere" ? (
+                <SphereParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "Cone" ? (
+                <ConeParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "Cylinder" ? (
+                <CylinderParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "Ellipsoid" ? (
+                <EllipsoidParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "EllipticalParabaloid" ? (
+                <EllipticalParabaloidParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "HyperbolicCylinder" ? (
+                <HyperbolicCylinderParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "HyperbolicParaboloid" ? (
+                <HyperbolicParaboloidParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "OneWayHyperboloid" ? (
+                <OneWayHyperboloidParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "ParabalidCylinder" ? (
+                <ParabalidCylinderParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "Tor" ? (
+                <TorParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : figureName === "TwoWayHyperboloid" ? (
+                <TwoWayHyperboloidParams getFigure={getFigure} figureName={figureName} setScene={setScene} />
+            ) : (
+                <></>
+            )}
+        </div>
+    );
 
     /*constructor(props) {
         super(props);
