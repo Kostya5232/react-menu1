@@ -1,7 +1,8 @@
-import { Figure, Point, Edge, Polygon } from '../entities';
+import { Figure, Point, Edge, Polygon } from "../entities";
 
 class EllipticalParabaloid extends Figure {
-    constructor(a = 10, b = 5, count = 20, color = "lightgreen", x = 0, y = 0, z = 0) {
+    constructor(options = {}) {
+        const { a = 10, b = 5, count = 20, color = "lightgreen", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
