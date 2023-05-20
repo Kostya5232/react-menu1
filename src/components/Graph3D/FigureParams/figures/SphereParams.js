@@ -6,6 +6,8 @@ export default function SphereParams({ getFigure, figureName, setScene }) {
     const ref4 = useRef(null);
     const ref5 = useRef(null);
     const ref6 = useRef(null);
+    const refAnim = useRef(null);
+
 
     const onChange = () => {
         const color = ref1.current.value;
@@ -15,9 +17,11 @@ export default function SphereParams({ getFigure, figureName, setScene }) {
 
         const r = ref5.current.value - 0;
         const count = ref6.current.value - 0;
+        const animations = refAnim.current.value;
+
 
         if (color) {
-            setScene([getFigure(figureName, { r, count, color, x, y, z })]);
+            setScene([getFigure(figureName, { r, count, color, animations, x, y, z })]);
         }
     };
 
@@ -28,6 +32,9 @@ export default function SphereParams({ getFigure, figureName, setScene }) {
             <br></br>
             <span>Плотность точек: </span>
             <input ref={ref6} onChange={onChange} defaultValue={20} />
+            <br></br>
+            <span>Анимации</span>
+            <input ref={refAnim} onChange={onChange}/>
             <br></br>
             <span>Выбор цвета: </span>
             <input ref={ref1} type="color" onChange={onChange} />

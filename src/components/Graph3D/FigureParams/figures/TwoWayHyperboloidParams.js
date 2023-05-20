@@ -8,6 +8,7 @@ export default function TwoWayHyperboloidParams({ getFigure, figureName, setScen
     const ref6 = useRef(null);
     const ref7 = useRef(null);
     const ref8 = useRef(null);
+    const refAnim = useRef(null);
 
     const onChange = () => {
         const color = ref1.current.value;
@@ -19,9 +20,10 @@ export default function TwoWayHyperboloidParams({ getFigure, figureName, setScen
         const b = ref6.current.value - 0;
         const c = ref7.current.value - 0;
         const count = ref8.current.value - 0;
+        const animations = refAnim.current.value;
 
         if (color) {
-            setScene([getFigure(figureName, { a, b, c, count, color, x, y, z })]);
+            setScene([getFigure(figureName, { a, b, c, count, color, animations, x, y, z })]);
         }
     };
 
@@ -38,6 +40,9 @@ export default function TwoWayHyperboloidParams({ getFigure, figureName, setScen
             <br></br>
             <span>Плотность точек: </span>
             <input ref={ref8} onChange={onChange} defaultValue={20} />
+            <br></br>
+            <span>Анимации</span>
+            <input ref={refAnim} onChange={onChange}/>
             <br></br>
             <span>Выбор цвета: </span>
             <input ref={ref1} type="color" onChange={onChange} />

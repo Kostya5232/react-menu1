@@ -2,18 +2,7 @@ import { useState, useCallback } from "react";
 
 import useGetFigure from "./useGetFigure";
 
-import CubeParams from "./figures/CubeParams";
-import SphereParams from "./figures/SphereParams";
-import ConeParams from "./figures/ConeParams";
-import CylinderParams from "./figures/CylinderParams";
-import EllipsoidParams from "./figures/EllipsoidParams";
-import EllipticalParabaloidParams from "./figures/EllipticalParabaloidParams";
-import HyperbolicCylinderParams from "./figures/HyperbolicCylinderParams";
-import HyperbolicParaboloidParams from "./figures/HyperbolicParaboloidParams";
-import OneWayHyperboloidParams from "./figures/OneWayHyperboloidParams";
-import ParabalidCylinderParams from "./figures/ParabalidCylinderParams";
-import TorParams from "./figures/TorParams";
-import TwoWayHyperboloidParams from "./figures/TwoWayHyperboloidParams";
+import{ConeParams, CubeParams, CylinderParams, EllipsoidParams, EllipticalParabaloidParams, HyperbolicParaboloidParams, HyperbolicCylinderParams, OneWayHyperboloidParams, ParabalidCylinderParams, SphereParams, TorParams, TwoWayHyperboloidParams} from './figures'
 
 export default function FigureParams({ setScene }) {
     const [figureName, setFigureName] = useState(null);

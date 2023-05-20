@@ -3,7 +3,7 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 class Cube extends Figure {
     constructor(options = {}) {
         console.log(options);
-        const { color = "#ff0000", x = 0, y = 0, z = 0 } = options;
+        const { color = "#ff0000", animations = "" , x = 0, y = 0, z = 0 } = options;
         const points = [
             new Point(10 + x, 10 + y, 10 + z),
             new Point(10 + x, -10 + y, 10 + z),
@@ -36,7 +36,7 @@ class Cube extends Figure {
             new Polygon([0, 3, 7, 1], color),
             new Polygon([0, 3, 4, 2], color),
         ];
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 

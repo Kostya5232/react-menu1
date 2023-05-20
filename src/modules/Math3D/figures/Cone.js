@@ -2,10 +2,14 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 
 class Cone extends Figure {
     constructor(options = {}) {
-        const { r = 2, count = 8, color = "lightgreen", x = 0, y = 0, z = 0 } = options;
+        const { r = 2, count = 8, color = "lightgreen", animations = "", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
+        
+
+    
+        //this.animations=[{method:'rotateOx',value: 0.01,center: new  Point()}]
         //точки
         for (let i = -count; i <= count; i++) {
             const T = ((2 * Math.PI) / count) * i;
@@ -35,8 +39,7 @@ class Cone extends Figure {
                 polygons.push(new Polygon([i, i + 1 - count, i + 1, i + count], color));
             }
         }
-
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 

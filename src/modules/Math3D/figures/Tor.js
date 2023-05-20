@@ -2,7 +2,7 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 
 class Tor extends Figure {
     constructor(options = {}) {
-        const { R = 13, r = 5, count = 15, color = "lightgreen", x = 0, y = 0, z = 0 } = options;
+        const { R = 13, r = 5, count = 15, color = "lightgreen", animations = "", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
@@ -40,7 +40,7 @@ class Tor extends Figure {
         }
         polygons.push(new Polygon([0, count - 1, points.length - 1, points.length - count], color));
 
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 

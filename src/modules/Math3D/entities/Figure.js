@@ -1,26 +1,36 @@
 import Point from './Point';
 
 class Figure {
-  constructor(points = [], edges = [], polygons = [], center = new Point()) {
+  constructor(points = [], edges = [], polygons = [],animations='', center = new Point()) {
     this.points = points;
     this.edges = edges;
     this.polygons = polygons;
     this.center = center;
-    this.animations = [];
+    
+    this.animations = this.setAnimation(animations);
   }
-
+  // {method:'rotateOx',value: 0.01,center}
   dropAnimation() {
     this.animations = [];
   }
 
-  setAnimation(method, value, center) {
-    this.animations.push({
-      method,
-      value,
-      center: center ? center : this.center,
-    });
-  }
+  setAnimation(animation) {
+    let anim = []
+        let str = animation.split(",");
+        const c = [];
+        str.forEach((elem) => {
+            c.push(elem.split(" ").filter((el) => el !== ""));
+        });
+        str = c;
+        str.forEach((elem) => {
+            if ((elem[0] === "rotateOx" || elem[0] === "rotateOy" || elem[0] === "rotateOz") && !isNaN(elem[1]) && elem.length === 2) {
+              anim.push({method: elem[0], value:elem[1]-0, center:new Point()})
 
+            }
+        });
+        return anim
+  }
+  
   doAnimation(math3D) {
     this.animations.forEach((anim) => {
       const T2 = math3D.getTransformMatrix(math3D[anim.method](anim.value));

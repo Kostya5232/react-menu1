@@ -4,14 +4,18 @@ export default function CubeParams({ getFigure, figureName, setScene }) {
     const ref2 = useRef(null);
     const ref3 = useRef(null);
     const ref4 = useRef(null);
+    const refAnim = useRef(null)
+
 
     const onChange = () => {
         const color = ref1.current.value;
         const x = ref2.current.value - 0;
         const y = ref3.current.value - 0;
         const z = ref4.current.value - 0;
+        const animations = refAnim.current.value;
+        
         if (color) {
-            setScene([getFigure(figureName, { color, x, y, z })]);
+            setScene([getFigure(figureName, { color, animations, x, y, z })]);
         }
     };
 
@@ -19,6 +23,9 @@ export default function CubeParams({ getFigure, figureName, setScene }) {
         <div>
             <span>Выбор цвета</span>
             <input ref={ref1} type="color" onChange={onChange} />
+            <br></br>
+            <span>Анимации</span>
+            <input ref={refAnim} onChange={onChange}/>
             <br></br>
             <span>Координата x: </span>
             <input ref={ref2} onChange={onChange} />

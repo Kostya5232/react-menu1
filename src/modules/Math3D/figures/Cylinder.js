@@ -2,7 +2,7 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 
 class Cylinder extends Figure {
     constructor(options = {}) {
-        const { r = 5, h = 5, count = 10, color = "ff0000", x = 0, y = 0, z = 0 } = options;
+        const { r = 5, h = 5, count = 10, color = "ff0000", animations = "", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
@@ -39,7 +39,7 @@ class Cylinder extends Figure {
             }
         }
 
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 

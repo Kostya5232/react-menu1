@@ -2,7 +2,7 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 
 class Sphere extends Figure {
     constructor(options = {}) {
-        const { r = 10, count = 20, color = "#ffff44", x = 0, y = 0, z = 0 } = options;
+        const { r = 10, count = 20, color = "#ffff44", animations = "", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
@@ -33,7 +33,7 @@ class Sphere extends Figure {
                 polygons.push(new Polygon([i, i + 1 - count, i + 1, i + count], color));
             }
         }
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 

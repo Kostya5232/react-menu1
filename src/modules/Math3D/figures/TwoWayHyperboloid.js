@@ -2,7 +2,7 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 
 class TwoWayHyperboloid extends Figure {
     constructor(options = {}) {
-        const { a = 2, b = 3, c = 4, count = 20, color = "lightgreen", x = 0, y = 0, z = 0 } = options;
+        const { a = 2, b = 3, c = 4, count = 20, color = "lightgreen", animations = "", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
@@ -66,7 +66,7 @@ class TwoWayHyperboloid extends Figure {
             );
         }
 
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 

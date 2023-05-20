@@ -1,5 +1,5 @@
 import { useRef } from "react";
-export default function HyperbolicCylinderParams({ getFigure, figureName, setScene }) {
+export default function HyperbolicParaboloidParams({ getFigure, figureName, setScene }) {
     const ref1 = useRef(null);
     const ref2 = useRef(null);
     const ref3 = useRef(null);
@@ -7,6 +7,8 @@ export default function HyperbolicCylinderParams({ getFigure, figureName, setSce
     const ref5 = useRef(null);
     const ref6 = useRef(null);
     const ref7 = useRef(null);
+    const refAnim = useRef(null);
+
 
     const onChange = () => {
         const color = ref1.current.value;
@@ -17,9 +19,11 @@ export default function HyperbolicCylinderParams({ getFigure, figureName, setSce
         const p = ref5.current.value - 0;
         const q = ref6.current.value - 0;
         const count = ref7.current.value - 0;
+        const animations = refAnim.current.value;
+
 
         if (color) {
-            setScene([getFigure(figureName, { p, q, count, color, x, y, z })]);
+            setScene([getFigure(figureName, { p, q, count, color, animations, x, y, z })]);
         }
     };
 
@@ -33,6 +37,9 @@ export default function HyperbolicCylinderParams({ getFigure, figureName, setSce
             <br></br>
             <span>Плотность точек: </span>
             <input ref={ref7} onChange={onChange} defaultValue={20} />
+            <br></br>
+            <span>Анимации</span>
+            <input ref={refAnim} onChange={onChange}/>
             <br></br>
             <span>Выбор цвета: </span>
             <input ref={ref1} type="color" onChange={onChange} />

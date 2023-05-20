@@ -2,7 +2,7 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 
 class HyperbolicCylinder extends Figure {
     constructor(options = {}) {
-        const { a = 10, b = 10, count = 20, color = "lightgreen", x = 0, y = 0, z = 0 } = options;
+        const { a = 10, b = 10, count = 20, color = "lightgreen", animations = "", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
@@ -44,7 +44,7 @@ class HyperbolicCylinder extends Figure {
             }
         }
 
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 

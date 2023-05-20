@@ -2,7 +2,7 @@ import { Figure, Point, Edge, Polygon } from "../entities";
 
 class HyperbolicParaboloid extends Figure {
     constructor(options = {}) {
-        const { p = 3, q = 4, count = 10, color = "lightgreen", x = 0, y = 0, z = 0 } = options;
+        const { p = 3, q = 4, count = 10, color = "lightgreen", animations = "", x = 0, y = 0, z = 0 } = options;
         const points = [];
         const edges = [];
         const polygons = [];
@@ -35,7 +35,7 @@ class HyperbolicParaboloid extends Figure {
             }
         }
 
-        super(points, edges, polygons);
+        super(points, edges, polygons, animations);
     }
 }
 
