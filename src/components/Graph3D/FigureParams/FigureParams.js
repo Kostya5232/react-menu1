@@ -33,7 +33,7 @@ export default function FigureParams({ setScene }) {
         <div className="selectFigur" id="selectFigur">
             <select id="figures" onChange={selectFigureHandler}>
                 <option className="figur" value="Cube">
-                    Куб
+                    Куб10
                 </option>
                 <option className="figur" value="Sphere">
                     Сфера
