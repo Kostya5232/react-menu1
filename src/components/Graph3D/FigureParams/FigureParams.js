@@ -25,7 +25,7 @@ export default function FigureParams({ setScene }) {
                     Куб
                 </option>
                 <option className="figur" value="Sphere">
-                    Сфера
+                    Сфера10
                 </option>
                 <option className="figur" value="Cone">
                     Конус
